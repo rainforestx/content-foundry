@@ -1,7 +1,10 @@
 # ANCHOR-SPEC - illustrated articles for the directory property
 
-STATUS: DRAFT - awaiting operator signature. Nothing generates against an
-unsigned spec.
+STATUS: SIGNED by the operator (RainforestX), 2026-08-02, in session:
+"sign the anchor spec. proceed with the first article". Generation is
+authorized against this version. Section 3's skeleton remains PROPOSED in
+origin - signed as the working structure, refined by what production
+teaches. Amendments require a new signature.
 
 Every rule cites its source (CATALOGUE-CONVENTIONS.md as CONV; CLAUDE.md
 where a rule lives only there). CONV carries three colliding numbering
@@ -246,4 +249,4 @@ factual authority; disagreement resolves in the operator's favour, and
 taste rulings are recorded here (subjective-quality-guidance, "Reviewing
 subjective work").
 
-This spec is unsigned. It generates nothing until the operator signs.
+Signature status lives in the STATUS line at the head of this file.
