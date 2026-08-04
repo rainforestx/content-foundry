@@ -188,3 +188,12 @@ datasheet as a manufacturer primary. Battery life, weight, IP rating and
 USB-C charging entered the article (claims 54-55); the battery-absence row
 48 is retired with its audit trail; the Sources paragraph now names the
 datasheet (claim 56).
+
+## Layout addition 2026-08-04: the in-brief box and page navigation
+
+The "In brief" box and "On this page" links added after the scope box are
+restatements for skimming readers, not new claims: every bullet condenses
+claims already tabled above (On 3: rows 1, 2, 10, 29, 33, 39, 42, 54, 55;
+the navigation carries no factual content). A future edit to any restated
+fact must update its in-brief twin in the same commit - same drift rule
+as the JSON-LD block.

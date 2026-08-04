@@ -39,6 +39,18 @@ point at two or three passages in article 1 and say who they missed and in
 which direction - those become rulings 2 onward, and the first specific
 inputs the next article is written against.
 
+### Ruling 2 - 2026-08-04, article 2 (Roger Select 3), in session
+
+Verbatim: "yes pretty good otherwise. tone is better."
+
+Reading: the audience-dossier-driven register (concession-first, honest
+limitation up front, scoped worth-it framing) moved tone in the right
+direction. The dossier's approach is validated for continued use; the
+operator's same message asked whether layout and text formatting are
+optimal, which produced the in-brief box and on-this-page navigation
+added to both articles the same day - treat those as the current layout
+baseline pending the operator's rendered review.
+
 ## Segment-adaptive plan (agreed direction, not yet in force)
 
 Once AUDIENCE.md is signed: each article's brief names a primary reader

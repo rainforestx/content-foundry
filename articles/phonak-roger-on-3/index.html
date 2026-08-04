@@ -75,6 +75,25 @@
     margin: 0 0 1rem 0;
     font-size: 0.98rem;
   }
+  .inbrief {
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    background: var(--paper);
+    padding: 1rem 1.2rem;
+    margin: 1.4rem 0 0.4rem 0;
+    font-size: 0.95rem;
+  }
+  .inbrief p { margin: 0 0 0.4rem 0; }
+  .inbrief ul { margin: 0 0 0 1.1rem; }
+  .inbrief li { margin-bottom: 0.35rem; }
+  .pagenav {
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    margin: 0.8rem 0 0.4rem 0;
+  }
+  .pagenav a { color: var(--accent); text-decoration: none; }
+  .pagenav a:hover { text-decoration: underline; }
+  h2 { scroll-margin-top: 1rem; }
   figure {
     margin: 1.8rem 0;
     padding: 0;
@@ -151,7 +170,19 @@
   </div>
 </section>
 
-<h2>What it is, and how it works</h2>
+<div class="inbrief">
+  <p><b>In brief.</b></p>
+  <ul>
+    <li>A remote microphone for hearing past noise and distance: held, worn or placed near the talker, it carries their voice by radio into receivers in your hearing devices.</li>
+    <li>The third generation carries unlimited receivers inside the microphone and installs them itself into compatible Phonak, Unitron and Hansaton aids and the AB Naida CI M and Sky CI M processors.</li>
+    <li>Other manufacturers' aids connect instead through a Roger NeckLoop (any T-coil device) or a Roger X receiver.</li>
+    <li>Phonak's datasheet: 27 grams, USB-C charging, IP54, and a stated 8 hours of streaming to RogerDirect devices on a charge.</li>
+    <li>Not for devices with no T-coil, no direct audio input and no RogerDirect platform - confirm your model's path before spending anything.</li>
+  </ul>
+  <p class="pagenav">On this page: <a href="#how-it-works">How it works</a> &middot; <a href="#living">Living with it</a> &middot; <a href="#compatibility">Compatibility</a> &middot; <a href="#not-for">Who it is not for</a> &middot; <a href="#faq">Questions</a> &middot; <a href="#sources">Sources</a></p>
+</div>
+
+<h2 id="how-it-works">What it is, and how it works</h2>
 
 <p>Hearing aids are short-range instruments. Phonak's own professional literature puts the useful conversational range - the "near field" in which directional microphones and noise reduction do their best work - at about 1.5 metres from the talker. Beyond that, the aid's microphones take in more room and less voice, and no amount of amplification fixes a signal that arrives already buried in noise.</p>
 
@@ -217,7 +248,7 @@
 
 <p>Earlier units do not have this. The previous Roger On and Roger On iN can occupy the same shelf and a similar price, so the distinction is worth holding onto: Sonova's launch material is explicit that the unlimited built-in receivers and the associated new features are only available in the Roger 3 generation. The iN units carried built-in receivers to install, but not the unlimited pool; non-iN units relied on separately purchased receivers installed by a hearing care professional.</p>
 
-<h2>Living with it: the modes, and what they are for</h2>
+<h2 id="living">Living with it: the modes, and what they are for</h2>
 
 <p>The Roger On is Phonak's all-situations microphone, and its modes map onto placements. It contains an accelerometer - the same class of component that rotates a phone screen - and uses orientation plus the acoustic environment to pick its microphone mode automatically: held in the hand, lying on a table, or clipped to a lapel each produce different behaviour without a menu visit. If it is dropped, it mutes on the way down, so the listener is spared the crash of the landing.</p>
 
@@ -296,7 +327,7 @@
 
 <p>The practical numbers, from Phonak's own technical datasheet for the third-generation unit: it weighs 27 grams, charges by USB-C, and is protected against splash and dust to IP54. The built-in rechargeable battery runs a stated 8 hours when streaming to RogerDirect hearing devices, or 6 hours through a separate Roger receiver - enough for a school or working day on one charge, but worth knowing before a long day that runs into the evening. In the box, per the same datasheet: the microphone, the docking station, a power supply with USB cable, optical and analog audio cables for the TV connection, a lanyard and a case.</p>
 
-<h2>Compatibility, precisely</h2>
+<h2 id="compatibility">Compatibility, precisely</h2>
 
 <p>Every compatibility question about this product reduces to one question: what receiver path do your devices have? There are four, and they cover different populations.</p>
 
@@ -374,13 +405,13 @@
 
 <p>For NHS wearers the path splits by generation. The NHS Phonak Nathos Nova line is built on the Marvel platform and takes the RogerDirect route - it has no Direct Audio Input port at all, so the older audio-shoe route does not apply to it. The earlier Nathos Auto line is the reverse: Roger X with an audio shoe, or the T-coil and NeckLoop route. Any NHS aid with a T-coil, from any maker, can use the NeckLoop.</p>
 
-<h2>Who it is not for</h2>
+<h2 id="not-for">Who it is not for</h2>
 
 <p>Some devices have no Roger path at all: no T-coil, no Direct Audio Input or compatible streaming accessory, and no RogerDirect platform. A device must miss all of these before Roger is ruled out, but the population is not empty - it concentrates among small in-canal customs and many low-cost over-the-counter aids, where the T-coil is omitted for size or cost and no accessory streamer exists. Bluetooth does not rescue these cases: an aid's consumer Bluetooth is not a Roger receiver. If your model might sit in this group, confirm with your audiologist before spending anything.</p>
 
 <p>A different group can use Roger On but would be better served elsewhere in the range. If your difficult listening is overwhelmingly seated meetings, the <a href="../phonak-roger-select-3/">Roger Select 3</a> is purpose-built for the middle of a table, switching automatically between up to six participants - our full guide to it covers when it beats the Roger On. If your only problem is the television, a dedicated TV streamer such as the Phonak TV Connector solves that one job without a microphone attached. And if what you find second-hand is an earlier Roger On or Roger On iN, remember that the unlimited built-in receivers and the newest modes belong to the third generation only - an earlier unit is not this product at a discount.</p>
 
-<h2>Questions worth asking before you buy</h2>
+<h2 id="faq">Questions worth asking before you buy</h2>
 
 <dl class="faq">
   <dt>Do I need to buy a receiver as well as the microphone?</dt>
@@ -402,7 +433,7 @@
   <dd><p>Yes, materially. Sonova's launch material states the unlimited built-in receivers are only available in the Roger 3 generation, alongside features new at that launch such as stereo wide pointing mode. The earlier iN variant carried built-in receivers to install but not an unlimited pool, and pre-iN units needed separately purchased receivers installed professionally. When comparing prices across listings, first establish which generation is in front of you.</p></dd>
 </dl>
 
-<h2>Sources and independence</h2>
+<h2 id="sources">Sources and independence</h2>
 
 <div class="sources">
 <p>The product facts in this guide rest on manufacturer-primary documents: Phonak's Rogerpedia professional reference (V9.00, September 2024, Australian edition - the first edition to document the Roger Unlimited built-in receivers, including its cochlear implant compatibility tables and mode descriptions), the Sonova press release of 29 August 2024 announcing the third-generation microphones, the Phonak Roger On 3 user guide, the Roger On 3 technical datasheet, Phonak product and support pages for the Roger family, and evidence-tiered research compiled and verified against those sources. Where a figure or claim appears in none of them, this guide says so rather than estimating: no verified UK retail price was available at the time of writing, so this guide carries none. Claims marked as needing professional confirmation are marked that way because the manufacturer's published material genuinely does not settle them.</p>

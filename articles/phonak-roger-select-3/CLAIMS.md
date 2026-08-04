@@ -175,3 +175,12 @@ resting on byte-verified quotes.
 - No numeric "up to N aids/receivers/mics" for the Select 3 anywhere
   (GAP4 sec 9 DO-NOT-SAY); the only microphone-count figure printed is
   the On 3 datasheet's network cap, On-scoped and attributed (L7).
+
+## Layout addition 2026-08-04: the in-brief box and page navigation
+
+The "In brief" box and "On this page" links added after the scope box are
+restatements for skimming readers, not new claims: every bullet condenses
+claims already tabled above (six-direction switching, the talkers-not-
+listeners correction, unlimited receivers, the Bluetooth-scope claim, the
+Select-or-On routing). Same drift rule as the JSON-LD twins: a future
+edit to any restated fact updates its in-brief twin in the same commit.

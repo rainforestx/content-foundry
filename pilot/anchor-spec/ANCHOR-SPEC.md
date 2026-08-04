@@ -251,12 +251,20 @@ subjective work").
 
 Signature status lives in the STATUS line at the head of this file.
 
-## Amendment A1 - product imagery (PROPOSED, unsigned)
+## Amendment A1 - product imagery (SIGNED)
 
 Basis: the operator stated in session, 2026-08-04: "we have full
-permissions for from the manufacturer" - authorisation to use official
-manufacturer product imagery. This amendment activates on operator
-signature of this section; until then articles carry no raster imagery.
+permissions for from the manufacturer", and on 2026-08-04 (late session)
+directed integration: "what about the official supplier photography and
+diagrams as discussed?" - recorded here as the activating signature.
+Execution note, same date: the Drive archive's Roger On packshot set
+(asset 056-3010, created 2021-02) is GEN-1 imagery, and no Roger On 3 or
+Select 3 packshots exist in the archive; since gen 1 and gen 3 are
+externally near-identical, generation evidence must come from asset
+provenance (which portal folder or asset number it came from), not from
+looking at the picture. Integration therefore waits on gen-3 assets
+landing in Drive (or operator photography of held stock) - tracked in
+pilot/ACQUISITIONS.md.
 
 1. Sources, in order of preference: (a) the operator's own photography of
    held stock - no licence question, reinforces the independence
