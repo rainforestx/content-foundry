@@ -85,6 +85,8 @@ confident form.
 | 56 | Sources | The Roger On 3 technical datasheet is among the manufacturer-primary documents the guide rests on | RESEARCH.md sec 5 provenance record | CONFIRMED |
 | 57 | FAQ 4 | The docking station takes the television's optical or analog audio output, and both cables are included in the box | On 3 datasheet: docking station "3.5 mm analog and optical digital (Toslink) audio input"; included accessories list "optical audio cable, analog audio cable" (RESEARCH.md secs 5-6; restores the detail the 2026-08-02 fix pass removed as unmapped, now with an On 3 primary) | CONFIRMED (see caveat) |
 | 58 | Footer | Updated 4 August 2026 with figures from the Roger On 3 technical datasheet | This file's Spec upgrade section + RESEARCH.md secs 5-6 | CONFIRMED |
+| 59 | Living with it | In the box: microphone, docking station, power supply with USB cable, optical and analog audio cables, lanyard, case | On 3 datasheet, "Included accessories" row (RESEARCH.md sec 5) | CONFIRMED (see caveat) |
+| 60 | FAQPage JSON-LD block | The structured-data block restates FAQ answers 1-6 in condensed form | Same sources as the FAQ claims it condenses (claims 12, 14, 15, 25, 33, 35, 37, 39, 45, 52, 53, 57). DRIFT RISK recorded: any edit to a visible FAQ answer must update the JSON-LD twin in the same commit, or the page asserts two different answers | CONFIRMED (derived) |
 
 ## Figure captions as claims
 
