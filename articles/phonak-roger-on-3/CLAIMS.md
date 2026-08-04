@@ -49,7 +49,7 @@ confident form.
 | 20 | Figure 2 caption + modes | Table mode uses MultiBeam technology: microphones in six directions, 360-degree comparison, direction with best signal-to-noise ratio auto-selected | V9 AU txt, key features p9 | CONFIRMED |
 | 21 | Modes | Stereo wide pointing mode is controlled from the myRogerMic app and widens pickup; a panel discussion is covered from a single placement | V9 AU txt, key features p9 + "Panel Discussions" passage | CONFIRMED |
 | 22 | Modes | Roger On can be combined with other Roger microphones (MultiTalker Network); in a network it is worn by a talker | V9 AU txt (Roger On bullet, MultiTalker Network) + Roger On 3 user guide sec 13 via GAP4 sec 5 | CONFIRMED |
-| 23 | Modes | No numeric network-size cap is published in consumer documentation; treat specific figures elsewhere with caution | GAP4 sec 5 (user guide searched; no cap found) | ABSENCE (HIGH) |
+| 23 | Modes (corrected 2026-08-04) | The MultiTalker Network supports up to 10 connected microphones | Roger On 3 Technical data datasheet ("Max. connected microphones Up to 10"), Drive read route per RESEARCH.md sec 5. The prior version of this row was an absence claim (GAP4 sec 5: no cap in user guide/Rogerpedia) which the datasheet OVERTURNS - the absence was true of the surfaces searched, but the datasheet publishes the figure. Article sentence corrected same day | CONFIRMED (see caveat) |
 | 24 | Modes | Roger system volume rises automatically as noise rises | V9 AU txt, "Adaptive behavior" | CONFIRMED |
 | 25 | Figure 2 caption + modes + FAQ 4 | Docked, it streams TV; cabled to a smartphone, music; over USB it works like a headset for online calls, streaming the far end to the aids and returning the wearer's voice to the computer | V9 AU txt, "Headset mode" and "Watch TV and more" | CONFIRMED |
 | 26 | Compatibility path 1 | Phonak Infinio, Lumity and Paradise are the current platforms; Marvel is an earlier platform still supported; all four include RogerDirect | V9 AU txt p20 ("RogerDirect applies to Phonak Infinio, Lumity, Paradise and Marvel hearing aids"); GAP1 Fact 2 (V7/V8 quote + Dutch KB four-platform list); platform currency per CATALOGUE-CONVENTIONS.md platform table | CONFIRMED |
@@ -74,12 +74,15 @@ confident form.
 | 45 | FAQ 2 | Phonak makes design-integrated receivers shaped for selected Phonak hearing aids | GAP2 sec 1 (Phonak KB verbatim: "Roger design integrated receivers for selected Phonak hearing aids") | HIGH |
 | 46 | Sources | V9.00 2024-09 AU is the first Rogerpedia edition to document the Roger Unlimited built-in receivers | research/T38_DL_030_GAP1_V7_REWORK_2026_07_28.md sec 2 (token boundary byte-verified across V7/V8/V9) | CONFIRMED |
 | 47 | Sources | No verified UK retail price exists in the substrate; article carries no price | ABSENCE - substrate index GAPS item 1; research/T14_PHONAK_ROGER_DOSSIER.md S5 holds USD/AUD retail spreads tagged UNVERIFIED only. RESEARCH.md (landed 2026-08-02, after the review pass) records indicative dated UK retailer prices, but they are snippet-sourced below this article's tier bar AND the signed never-list item 17 bars factual claims from retailer pages, so the article still carries none | ABSENCE (stated) |
-| 48 | Sources | No battery-life figure is quoted | ABSENCE - substrate index GAPS item 3; the listing carries no numeric specs; V9 AU carries no battery-life spec for Roger On (searched the txt extract) | ABSENCE (stated) |
+| 48 | (retired 2026-08-04) The Sources paragraph no longer states a battery-life absence | The absence was real when frozen (substrate index GAPS item 3; V9 AU carries no battery-life spec) and was RESOLVED by the Drive read route on 2026-08-04: the Roger On 3 datasheet states the figure directly. Superseded by claims 54-55; row kept for the audit trail | RETIRED |
 | 49 | Footer | Phonak, Roger, RogerDirect, Audeo, Naida are Sonova AG trademarks; AB/Unitron/Hansaton are Sonova companies; Oticon is Demant; ReSound is GN; independence disclosure | CATALOGUE-CONVENTIONS.md sec 38 brand families + p.6 attribution pattern; listing fine print | CONVENTION |
 | 50 | How it works | The microphone picks the voice up close to the mouth (qualitative proximity; the earlier "centimetres" precision was removed in the fix pass as unsourced at that precision) | V9 AU txt user guidance ("Move your Roger microphone closer to the talker's mouth") - qualitative support only | CONFIRMED (qualitative) |
 | 51 | Standfirst | Identity descriptor: a wireless microphone held, worn or placed near the talker | V9 AU txt automatic microphone modes (hand, table, lapel placements; same passage as claim 16) | CONFIRMED |
 | 52 | FAQ 3 | Neptune has no NeckLoop route; its documented path is Roger X with the Neptune Connect adapter only | V9 AU CI compatibility table, Neptune row: Roger X + Neptune Connect marked, NeckLoop column unmarked; footnote 2 on that row is a settings recommendation (CI profile 4, EasyGain +8dB), not a path condition | CONFIRMED |
 | 53 | FAQ 5 | Phonak publishes a serial-number cutoff for the Roger X: older units cannot take RogerDirect installation; second-hand buyers should check the serial first | research/DL_030_GAP3_INSTALL_AUTHORITY_2026_07_27.md sec 5 SDF3 (Phonak receivers page, cross-referenced in B10 dossier sec 3), confidence table row HIGH | HIGH |
+| 54 | Living with it | Weight 27 g; USB-C charging; IP54 splash and dust protection | Roger On 3 Technical data datasheet, Drive file Roger_On_3_Datasheet.pdf (id 119X5XIi06PlfQF2RIeLhdVn1vj-jqYV1), retrieved 2026-08-04 via the Drive read route; provenance and extraction caveat in RESEARCH.md sec 5 | CONFIRMED (see caveat) |
+| 55 | Living with it | Operating time: a stated 8 h streaming to RogerDirect hearing devices, 6 h through a separate Roger receiver, from the built-in rechargeable battery | Same datasheet, Battery block ("Operating time 8h when using hearing device with RogerDirect / 6h when using Roger receiver"; Lithium Polymer 260 mAh 3.7 V) | CONFIRMED (see caveat) |
+| 56 | Sources | The Roger On 3 technical datasheet is among the manufacturer-primary documents the guide rests on | RESEARCH.md sec 5 provenance record | CONFIRMED |
 
 ## Figure captions as claims
 
@@ -173,3 +176,11 @@ statement was de-modelled ("Earlier generations") to keep the
 affirmative/redirect separation clean, and the standfirst receiver phrase
 varied to stop the verbatim echo; (6) the dead .note CSS rule and --warn
 tokens were deleted.
+
+## Spec upgrade 2026-08-04 (Drive read route)
+
+The Drive acquisition route (RESEARCH.md sec 5) landed the Roger On 3
+datasheet as a manufacturer primary. Battery life, weight, IP rating and
+USB-C charging entered the article (claims 54-55); the battery-absence row
+48 is retired with its audit trail; the Sources paragraph now names the
+datasheet (claim 56).

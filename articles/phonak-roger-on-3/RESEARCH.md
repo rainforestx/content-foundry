@@ -137,3 +137,51 @@ search snippets and SERP titles, so treat as indicative and re-verify before pri
 - Bluetooth version / radio details for Roger On 3: not in any reachable snippet.
 - Current phonak.com support-page statements (e.g. compatible-devices knowledge base
   article): URL known (see repo dossier), page unfetchable this session.
+
+## 5. Drive read route upgrade (2026-08-04)
+
+The egress problem in section 1 is resolved by a different acquisition path:
+the operator's Google Drive archive holds first-party Phonak PDFs, readable
+through the session's Drive integration with no egress (the same route the
+production repo's T73 dossier opened). Retrieved 2026-08-04 (`date -u`):
+
+- Roger_On_3_Datasheet.pdf, Drive file id 119X5XIi06PlfQF2RIeLhdVn1vj-jqYV1,
+  1,513,263 bytes, in the operator's archive since 2025-02-22. Provenance
+  caveat, stated rather than hidden: the Drive tool returns EXTRACTED TEXT,
+  not bytes, so the %PDF magic-byte check used for on-disk sources cannot be
+  run on it; corroboration instead is (a) the operator curated the archive,
+  (b) every overlapping figure agrees with the byte-verified Rogerpedia V9.00
+  and with the gen-1 datasheet snippets, (c) the document is internally
+  structured as the real datasheet (three numbered pages, Sonova Murten
+  imprint). Edition string: not visible in the extract - still UNRECORDED.
+
+Facts upgraded by that extract (tier CONFIRMED, manufacturer primary, with
+the extraction caveat above attached):
+- Operating time, stated for Roger On 3 directly: 8 h when using hearing
+  devices with RogerDirect, 6 h when using a Roger receiver. The section-1
+  inference warning is hereby resolved: the figure no longer rests on gen-1
+  carry-over.
+- Battery: Lithium Polymer, 260 mAh, 3.7 V (upgrades the section-1 SUSPECTED
+  snippet). Power supply 5 VDC / 1.0 A max, USB-C; "only use the original
+  USB Phonak power supply".
+- Dimensions 99.7 x 23.5 x 13.6 mm; weight 27 g - identical to the gen-1
+  figures, now stated for On 3 (the do-not-carry-over rule held AND the
+  carried value turned out true; both facts worth keeping).
+- Transmission range: up to 25 meters / 80 feet, clear line of sight, free
+  field (settles the 75-vs-80-feet spread in section 1; metres figure
+  unchanged).
+- IP54 splash and dust protection; 4 microphones; audio bandwidth
+  100 Hz - 7.3 kHz; max analog input 1 Vrms; supported digital format stereo
+  PCM; operating conditions 0 to +40 C.
+- MultiTalker Network: up to 10 connected microphones; a Roger On in a
+  network functions only in Presenter mode. Compatible microphones list
+  includes "Roger On V2" and "Roger On iN V2" - primary confirmation that
+  the V2 PRODUCT exists (its launch DATE stays in ABSENT).
+- Receiver compatibility: all personal Roger receivers except SoundField;
+  max connected receivers "Unlimited" (the datasheet's own word).
+
+Also present in the archive and not yet read: Roger_On_3_User_Guide.pdf
+(id 18ODJ_QT_e9lIs0M52UCzS0-cZIb6Rm25), Roger_On_Installation_Guide.pdf,
+PH_Datasheet_Roger_On_iN_210x297_EN_V3.00_10.pdf, Roger X datasheet V1.10,
+Roger NeckLoop and Clip-On Mic guides. UK pricing and the V2 launch date
+remain ABSENT - the Drive route does not carry those.
