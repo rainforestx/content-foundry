@@ -83,6 +83,8 @@ confident form.
 | 54 | Living with it | Weight 27 g; USB-C charging; IP54 splash and dust protection | Roger On 3 Technical data datasheet, Drive file Roger_On_3_Datasheet.pdf (id 119X5XIi06PlfQF2RIeLhdVn1vj-jqYV1), retrieved 2026-08-04 via the Drive read route; provenance and extraction caveat in RESEARCH.md sec 5 | CONFIRMED (see caveat) |
 | 55 | Living with it | Operating time: a stated 8 h streaming to RogerDirect hearing devices, 6 h through a separate Roger receiver, from the built-in rechargeable battery | Same datasheet, Battery block ("Operating time 8h when using hearing device with RogerDirect / 6h when using Roger receiver"; Lithium Polymer 260 mAh 3.7 V) | CONFIRMED (see caveat) |
 | 56 | Sources | The Roger On 3 technical datasheet is among the manufacturer-primary documents the guide rests on | RESEARCH.md sec 5 provenance record | CONFIRMED |
+| 57 | FAQ 4 | The docking station takes the television's optical or analog audio output, and both cables are included in the box | On 3 datasheet: docking station "3.5 mm analog and optical digital (Toslink) audio input"; included accessories list "optical audio cable, analog audio cable" (RESEARCH.md secs 5-6; restores the detail the 2026-08-02 fix pass removed as unmapped, now with an On 3 primary) | CONFIRMED (see caveat) |
+| 58 | Footer | Updated 4 August 2026 with figures from the Roger On 3 technical datasheet | This file's Spec upgrade section + RESEARCH.md secs 5-6 | CONFIRMED |
 
 ## Figure captions as claims
 

@@ -180,8 +180,42 @@ the extraction caveat above attached):
 - Receiver compatibility: all personal Roger receivers except SoundField;
   max connected receivers "Unlimited" (the datasheet's own word).
 
-Also present in the archive and not yet read: Roger_On_3_User_Guide.pdf
-(id 18ODJ_QT_e9lIs0M52UCzS0-cZIb6Rm25), Roger_On_Installation_Guide.pdf,
+Also present in the archive: Roger_On_Installation_Guide.pdf,
 PH_Datasheet_Roger_On_iN_210x297_EN_V3.00_10.pdf, Roger X datasheet V1.10,
-Roger NeckLoop and Clip-On Mic guides. UK pricing and the V2 launch date
-remain ABSENT - the Drive route does not carry those.
+Roger NeckLoop and Clip-On Mic guides. UK pricing remains ABSENT - the
+Drive route does not carry it.
+
+## 6. Second-pass findings (2026-08-04, Drive read + web search)
+
+- TRAP RECORDED - misfiled Drive file: "Roger_On_3_User_Guide.pdf"
+  (id 18ODJ_QT_e9lIs0M52UCzS0-cZIb6Rm25) actually contains the ORIGINAL
+  Roger On / Roger On iN user guide - its validity page reads "This user
+  guide is valid for: Roger On CE mark applied 2021 / Roger On iN CE mark
+  applied 2021". The filename lies about the generation (LEARNING #218
+  class: never trust a filename over the document's own imprint). BARRED as
+  an On 3 primary; VALID as gen-1/iN primary. Gen-1 facts it carries that
+  must not be printed as On 3 facts without On 3 corroboration: 80 percent
+  charge in 1 h / 100 percent in 3 h; lanyard within 20 cm of the mouth;
+  battery display full ~8h/mid ~4h. Note the connection-persistence
+  sentence ("Connecting a receiver is only required once...") appears in
+  this gen-1 guide word-for-word identical to the On 3 user guide sentence
+  the article quotes via GAP4 - cross-generation wording stability,
+  corroborating but not replacing the On 3 citation.
+- Roger On V2 launch date: June 2023, now the consistent secondary reading
+  (hearingtracker.com/resources/roger-on-v2 names June 2023 for the V2
+  release and its Headset Mode; AudiologyOnline Ask-the-Experts 28648
+  corroborates Headset Mode as the V2 feature). Still no Sonova/Phonak
+  press release surfaced. Tier: SUSPECTED (secondary consensus). The
+  earlier mid-2022 snippet is superseded.
+- On 3 datasheet edition: a search synthesis attributes "V1.00 / 2024-05"
+  to ph-datasheet-roger-on3-210x297-en.pdf. Tier: SUSPECTED (snippet-class;
+  the Drive extract itself shows no edition string). The search also
+  returned the datasheet's own product-description sentence verbatim
+  identical to the Drive extract's opening - further corroboration that
+  the Drive file is the real On 3 datasheet.
+- TV-side cabling, On 3: the On 3 datasheet (sec 5 source) states the
+  docking station carries "3.5 mm analog and optical digital (Toslink)
+  audio input" and lists an optical audio cable and analog audio cable
+  among included accessories - so the docking station cables to the
+  television's audio output. This restores, with an On 3 primary source,
+  the detail the 2026-08-02 fix pass removed as unmapped.
