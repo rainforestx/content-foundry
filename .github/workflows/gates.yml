@@ -1,0 +1,17 @@
+name: gates
+on:
+  push:
+  pull_request:
+jobs:
+  gates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install beautifulsoup4
+      - name: sabotage tests (every check must be able to fire)
+        run: python3 gates/tests/test_article_gates.py
+      - name: article gates (live corpus)
+        run: python3 gates/article_gates.py
