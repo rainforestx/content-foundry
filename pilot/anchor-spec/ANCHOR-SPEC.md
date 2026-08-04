@@ -250,3 +250,35 @@ taste rulings are recorded here (subjective-quality-guidance, "Reviewing
 subjective work").
 
 Signature status lives in the STATUS line at the head of this file.
+
+## Amendment A1 - product imagery (PROPOSED, unsigned)
+
+Basis: the operator stated in session, 2026-08-04: "we have full
+permissions for from the manufacturer" - authorisation to use official
+manufacturer product imagery. This amendment activates on operator
+signature of this section; until then articles carry no raster imagery.
+
+1. Sources, in order of preference: (a) the operator's own photography of
+   held stock - no licence question, reinforces the independence
+   disclosure, unique to the property; (b) official manufacturer imagery
+   under the stated permission, taken from the operator's Drive archive
+   (the archive holds official packshots and product renders); (c) nothing
+   - absence over an unverified image.
+2. Every image is a claim. An IMAGES section in the article's CLAIMS.md
+   records: filename, source (Drive file id or shoot date), licence basis
+   (operator permission / own photograph), and generation-verified-by -
+   the visual check that the pictured unit is the generation the article
+   covers. A filename's generation claim is never trusted (the misfiled
+   user guide precedent, RESEARCH.md sec 6 of the Roger On 3 article).
+3. Captions are body prose: fact-checked, tiered, and listed in the
+   claims table like any sentence.
+4. Attribution: official imagery is captioned "Image: Phonak" (or the
+   owning brand); own photography needs no attribution line.
+5. Presentation: images are compressed files in the article directory,
+   relative src, explicit width and height, alt text written as a factual
+   description (the alt is also a claim); the AA-contrast rule applies to
+   any text overlaid or adjacent; no image may be the sole carrier of a
+   fact the prose does not state.
+6. Diagrams are not replaced: photographs show what a thing looks like;
+   the drawn figures carry mechanism. Both justify their place
+   independently.
