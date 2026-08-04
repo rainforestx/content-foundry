@@ -156,4 +156,26 @@ built-in-receiver claim cites V9 AU or the Sonova press release ONLY.
 5. Bluetooth specifics (version, profiles, call detail) - Rogerpedia
    says only "Bluetooth for wireless phone calls".
 6. Network-parent question: Select 3 anchoring a Pass Around network is
-   unresolved (GAP6); network size caps unpublished (GAP4 sec 5).
+   unresolved (GAP6); network size caps unpublished on the surfaces GAP4
+   sec 5 searched - but the Roger On 3 datasheet (Drive read, sibling
+   article CLAIMS row 23) publishes up to 10 connected microphones for
+   the ON 3; that figure is On-scoped and must not be extended to the
+   Select (CLAIMS L7).
+
+## 6. Reviewer note: shared template furniture vs prose lift (2026-08-04)
+
+Decision recorded during the 2026-08-04 review fix loop, so future
+duplication reviews can tell furniture from lift. The scope-box framing
+(the "What this guide covers" panel: editorial-guide status, independence
+statement, sources-listed-at-end promise) and the footer independence and
+trademark disclaimers are SHARED TEMPLATE FURNITURE across this article
+property (Roger On 3, Roger Select 3, and future siblings). They are
+expected to match near-verbatim between articles and should not be
+flagged as lift. Body prose, figure captions and FAQ answers are NOT
+furniture: near-verbatim overlap there is a lift defect. This review
+found and reworded five such passages in this article (the
+compatibility-section opener, the Virto exception sentence, the
+who-it-is-not-for paragraph including the audiologist-confirmation
+sentence, and the CI FAQ opener). Standing: working rule for this
+directory, recorded by the fix agent; operator ratification into the
+anchor spec still pending.
