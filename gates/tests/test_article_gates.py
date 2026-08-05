@@ -74,7 +74,7 @@ class GateHarness(unittest.TestCase):
         self.assertEqual(self.run_gates(root), [])
 
     def test_ascii_style_fires_on_emdash_and_entity(self):
-        bad = CLEAN_HTML.replace("on a charge", "on a charge — easily")
+        bad = CLEAN_HTML.replace("on a charge", "on a charge \u2014 easily")
         root = self.build({"a": (bad, CLEAN_CLAIMS)})
         found = self.run_gates(root, "check_ascii_style")
         self.assertTrue(any(f[0] == "ascii_style" for f in found))
@@ -128,6 +128,20 @@ class GateHarness(unittest.TestCase):
         found2 = self.run_gates(root, "check_absence_vs_figure")
         self.assertEqual([f for f in found2 if f[0] == "absence_vs_figure"],
                          [])
+
+    def test_brand_tokens_fires_on_rogue_hex_and_font(self):
+        bad = CLEAN_HTML.replace(
+            "<main>", "<main><p style=\"color:#ff00aa\">hi</p>")
+        root = self.build({"a": (bad, CLEAN_CLAIMS)})
+        found = self.run_gates(root, "check_brand_tokens")
+        self.assertTrue(any("outside the brand token set" in f[2]
+                            for f in found))
+        bad2 = CLEAN_HTML.replace(
+            "<main>", "<main><p style=\"font-family: Comic Sans MS\">x</p>")
+        root2 = self.build({"a": (bad2, CLEAN_CLAIMS)})
+        found2 = self.run_gates(root2, "check_brand_tokens")
+        self.assertTrue(any("non-canonical font stack" in f[2]
+                            for f in found2))
 
     def test_upto_conflict_fires_on_same_noun_different_number(self):
         b = CLEAN_HTML_B.replace("up to ten connected\nmicrophones",

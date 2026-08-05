@@ -276,9 +276,37 @@ def check_upto_phrase_conflict():
                 flag("upto_phrase_conflict", noun, text)
 
 
+# 7 brand_tokens ---------------------------------------------------------
+BRAND_HEXES = {"#1d1d1b", "#52514e", "#6e6d69", "#ffffff", "#f6f5f1",
+               "#d9d6cd", "#1f5f3f", "#e8f0ea", "#000"}
+BRAND_FONT = ("-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, "
+              "Helvetica, Arial, sans-serif")
+
+
+def check_brand_tokens():
+    """Colour literals must stay inside the BRAND-TOKENS.md set and every
+    font-family must be the canonical stack. Spec: the token table in
+    pilot/anchor-spec/BRAND-TOKENS.md - amend there first, here second."""
+    hex_re = re.compile(r"#[0-9a-fA-F]{3,6}\b")
+    font_re = re.compile(r"font-family:\s*([^;}]+)")
+    for article in ARTICLES:
+        html = (article / "index.html").read_text()
+        for m in hex_re.finditer(html):
+            if m.group(0).lower() not in BRAND_HEXES:
+                line = html.count("\n", 0, m.start()) + 1
+                flag("brand_tokens", f"{article.name}:{line}",
+                     f"colour {m.group(0)} is outside the brand token set")
+        for m in font_re.finditer(html):
+            stack = " ".join(m.group(1).split())
+            if stack not in (BRAND_FONT, "inherit"):
+                line = html.count("\n", 0, m.start()) + 1
+                flag("brand_tokens", f"{article.name}:{line}",
+                     f"non-canonical font stack: {stack[:60]}")
+
+
 CHECKS = [check_ascii_style, check_jsonld_twin_sync, check_inbrief_sync,
           check_quote_consistency, check_absence_vs_figure,
-          check_upto_phrase_conflict]
+          check_upto_phrase_conflict, check_brand_tokens]
 
 
 def main():
