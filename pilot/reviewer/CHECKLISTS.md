@@ -195,3 +195,16 @@ ladder as the source system (LEARNINGS entry, then named checklist item, then
 machine gate where a check can be mechanized; see adversarial-review-battery
 SKILL.md growth rule and #195's registry graduation). A defect flagged but not
 converted into a named check or an owned queue item is a defect factory (#172).
+
+## Machine gates (the ladder's top rung, live since 2026-08-04)
+
+gates/article_gates.py runs six mechanized checks on every push via CI
+(.github/workflows/gates.yml): ASCII/entity style, JSON-LD twin sync,
+in-brief restatement sync, cross-article quote divergence, ABSENCE-row-vs-
+figure conflict (graduated from the network-cap incident, articles 1-2),
+and up-to-N phrase disagreement. gates/README.md documents what each check
+sees, the allowlist protocol for reviewed-and-accepted findings, and the
+declared blind spots. A reviewer does NOT re-run what the gates cover
+mechanically - but the gates' blind spots (meaning-level contradiction,
+claims tables that misdescribe the article) remain review work, and every
+gate check was sabotage-proven able to fire before its clean runs counted.

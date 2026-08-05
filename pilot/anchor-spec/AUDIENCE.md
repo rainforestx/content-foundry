@@ -1,7 +1,9 @@
 # AUDIENCE - reader segments, belief baselines, and register
 
-STATUS: DRAFT - awaiting operator signature. Article briefs may cite it as
-directional input; it becomes binding per-segment guidance when signed.
+STATUS: SIGNED by the operator (RainforestX), 2026-08-05, in session:
+"sign AUDIENCE.md and proceed with article 3". Per-segment guidance is now
+binding on article briefs. The section 5 tensions (price, named author,
+funding-route prominence) remain open individual rulings.
 
 Synthesized 2026-08-04 from a four-lens research pass (reader communities;
 institutional register: NHS/RNID/NDCS/Which?; competitor register, form
