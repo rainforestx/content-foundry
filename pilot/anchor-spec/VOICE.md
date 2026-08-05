@@ -51,6 +51,17 @@ optimal, which produced the in-brief box and on-this-page navigation
 added to both articles the same day - treat those as the current layout
 baseline pending the operator's rendered review.
 
+### Ruling 3 - 2026-08-05, article 3 (TV Connector), in session
+
+Verbatim: "article 3 accepted. ratify both."
+
+Reading: third consecutive acceptance; the dossier-driven register holds.
+The two parked review items are ratified: (1) the price-disclosure
+sentence and the CONV-worded CI FAQ question are template furniture,
+shared verbatim across articles by design and excluded from prose-lift
+censuses; (2) strict lede naming applies - standfirsts name Advanced
+Bionics explicitly, applied to all three articles in one wave.
+
 ## Segment-adaptive plan (agreed direction, not yet in force)
 
 Once AUDIENCE.md is signed: each article's brief names a primary reader

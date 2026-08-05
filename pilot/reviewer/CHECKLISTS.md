@@ -196,6 +196,18 @@ machine gate where a check can be mechanized; see adversarial-review-battery
 SKILL.md growth rule and #195's registry graduation). A defect flagged but not
 converted into a named check or an owned queue item is a defect factory (#172).
 
+## Ratified template furniture (operator, 2026-08-05)
+
+Shared verbatim across articles BY DESIGN, excluded from prose-lift
+shingle censuses: the scope-box and footer boilerplate, the
+price-disclosure sentence ("No verified UK retail price was available at
+the time of writing, so this guide carries none"), and the CONV-worded
+CI FAQ question ("I have an Advanced Bionics cochlear implant - does
+this work with my sound processor?"). Everything else is body prose and
+must be fresh per article. Additions to this list need operator
+ratification. Same ruling: standfirsts name Advanced Bionics explicitly
+(strict lede naming per CONV section 5).
+
 ## Machine gates (the ladder's top rung, live since 2026-08-04)
 
 gates/article_gates.py runs six mechanized checks on every push via CI
