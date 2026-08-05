@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phonak TV Connector: an independent guide</title>
+<style>
+  :root {
+    --ink: #1d1d1b;
+    --ink-soft: #52514e;
+    --ink-faint: #6e6d69;
+    --paper: #ffffff;
+    --paper-tint: #f6f5f1;
+    --rule: #d9d6cd;
+    --accent: #1f5f3f;
+    --accent-soft: #e8f0ea;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+  }
+  main {
+    max-width: 44rem;
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem 4rem 1.25rem;
+  }
+  header.masthead {
+    border-bottom: 3px solid var(--ink);
+    padding-bottom: 1.4rem;
+    margin-bottom: 2rem;
+  }
+  .kicker {
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin: 0 0 0.6rem 0;
+  }
+  h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+    margin: 0 0 0.8rem 0;
+    letter-spacing: -0.01em;
+  }
+  .standfirst {
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  h2 {
+    font-size: 1.35rem;
+    line-height: 1.3;
+    margin: 2.6rem 0 0.9rem 0;
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--rule);
+  }
+  h3 {
+    font-size: 1.05rem;
+    margin: 1.6rem 0 0.5rem 0;
+  }
+  p { margin: 0 0 1rem 0; }
+  ul, ol { margin: 0 0 1rem 1.3rem; padding: 0; }
+  li { margin-bottom: 0.45rem; }
+  a { color: var(--accent); }
+  .scope {
+    background: var(--paper-tint);
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.2rem;
+    margin: 0 0 1rem 0;
+    font-size: 0.98rem;
+  }
+  .inbrief {
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    background: var(--paper);
+    padding: 1rem 1.2rem;
+    margin: 1.4rem 0 0.4rem 0;
+    font-size: 0.95rem;
+  }
+  .inbrief p { margin: 0 0 0.4rem 0; }
+  .inbrief ul { margin: 0 0 0 1.1rem; }
+  .inbrief li { margin-bottom: 0.35rem; }
+  .pagenav {
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    margin: 0.8rem 0 0.4rem 0;
+  }
+  .pagenav a { color: var(--accent); text-decoration: none; }
+  .pagenav a:hover { text-decoration: underline; }
+  h2 { scroll-margin-top: 1rem; }
+  figure {
+    margin: 1.8rem 0;
+    padding: 0;
+  }
+  .figbox {
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 0.9rem;
+    background: var(--paper);
+    overflow-x: auto;
+  }
+  figure svg { display: block; width: 100%; height: auto; max-width: 100%; }
+  @media (max-width: 640px) {
+    figure svg { min-width: 620px; }
+  }
+  figcaption {
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    margin-top: 0.6rem;
+    line-height: 1.5;
+  }
+  figcaption b { color: var(--ink); }
+  dl.faq { margin: 0; }
+  dl.faq dt {
+    font-weight: 700;
+    margin: 1.4rem 0 0.35rem 0;
+  }
+  dl.faq dd { margin: 0 0 0 0; }
+  .sources {
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+  }
+  .sources p { margin-bottom: 0.7rem; }
+  footer.independence {
+    margin-top: 2.5rem;
+    padding-top: 1.2rem;
+    border-top: 3px solid var(--ink);
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+    line-height: 1.55;
+  }
+  @media (max-width: 480px) {
+    body { font-size: 16px; }
+    h1 { font-size: 1.6rem; }
+    h2 { font-size: 1.2rem; }
+    main { padding: 1.8rem 1rem 3rem 1rem; }
+  }
+  @media print {
+    main { max-width: none; }
+    .figbox { border-color: #000; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<header class="masthead">
+  <p class="kicker">Independent guide &middot; Hearing accessories</p>
+  <h1>Phonak TV Connector: television sound straight into your hearing aids - and whose devices can actually receive it</h1>
+  <p class="standfirst">The Phonak TV Connector is a small box that wires into a television's audio output and sends the sound by radio directly into compatible hearing aids and cochlear implant sound processors. Each listener hears it at a volume set on their own devices, while the television's own speakers keep playing for everyone else. It is the long-standing dedicated TV accessory of Phonak's wireless ecosystem, and it does exactly one job. This guide explains that job - and the single compatibility question that decides whether it will do it for you.</p>
+</header>
+
+<section aria-label="Scope">
+  <div class="scope">
+    <p style="margin:0;"><b>What this guide covers.</b> The Phonak TV Connector as sold today - retail listings label the current unit V2, and the retail catalogue behind this guide sells it under that label. It is written for people who wear Phonak or Unitron hearing aids, for NHS and high-street wearers who need to know whether their particular aids can receive it, and for Advanced Bionics cochlear implant users, who are covered by name rather than left to guess. Readers whose television trouble is only one part of a wider listening problem are routed to better-fitting products along the way. This is an editorial guide, independent of the manufacturer; every product fact in it is sourced, and the sources are listed at the end.</p>
+  </div>
+</section>
+
+<div class="inbrief">
+  <p><b>In brief.</b></p>
+  <ul>
+    <li>A dedicated one-job box: wired to the television's audio output, it streams the sound by radio to compatible hearing devices within a 15 metre (50 ft) radius - an unlimited number of listeners at once, each at a volume set on their own aids.</li>
+    <li>It works only with devices carrying Phonak's AirStream wireless: recent Phonak and Unitron hearing aids and the current Advanced Bionics implant processors. An aid's ordinary Bluetooth is not a substitute, and no Phonak document we consulted describes any way to add AirStream to an aid that lacks it.</li>
+    <li>It takes the television's optical output or a 3.5 mm analog cable, and understands Dolby Audio but not DTS - a one-time television settings change (PCM or stereo) prevents the usual silent-streamer surprise.</li>
+    <li>Phonak publishes no latency figure for the link; the honest sync story is the manufacturer's qualitative wording plus a documented delay adjustment, both covered below.</li>
+    <li>If the television is only one of several hard listening situations, the multi-role <a href="../phonak-roger-on-3/">Roger On 3</a> microphone also streams TV from its dock - the comparison is drawn below.</li>
+  </ul>
+  <p class="pagenav">On this page: <a href="#how-it-works">How it works</a> &middot; <a href="#living">Living with it</a> &middot; <a href="#compatibility">Compatibility</a> &middot; <a href="#not-for">Who it is not for</a> &middot; <a href="#faq">Questions</a> &middot; <a href="#sources">Sources</a></p>
+</div>
+
+<h2 id="how-it-works">What it is, and how it works</h2>
+
+<p>Start with what a television does to hearing aids. Aids are tuned for voices close to you; a television is a loudspeaker across the room, heard through the room's reflections, its background noise and everyone else in it. Turning the set up starts a volume war with the rest of the household, and what the aids amplify is still the room's version of the sound. No hearing aid setting fully solves that: the problem is distance, and removing distance is what a streamer is for.</p>
+
+<p>The TV Connector removes it at the source. It is a compact unit - 63 x 63 x 12 mm, small enough that Phonak's product information notes it can be mounted behind the television - wired to the set's audio output. It converts that audio into AirStream, Phonak's own 2.4 GHz streaming radio, and broadcasts it to compatible hearing devices within a 15 metre (50 ft) radius. Line of sight is not required, though the user guide warns that walls, furniture and large metallic structures can shorten the reach. Every connected, compatible device inside that radius hears the same stream - and each wearer sets their own listening volume on their own aids, while the television's speakers keep serving everyone else at the room's volume.</p>
+
+<p>AirStream deserves a plain-language sentence, because it decides everything else in this guide. It is not Bluetooth: it is Phonak's proprietary streaming radio, built into recent Phonak-family hearing devices at manufacture. Your aids' ordinary Bluetooth connection to a phone cannot receive it, and no Phonak document we consulted describes a way of adding AirStream to an aid that lacks it. You do not need to know any code or version number to check your own position - the model name on your paperwork is enough, and the compatibility question is worked through properly further down.</p>
+
+<p>On the wiring side there is one audio socket, fed by either of two cables: the optical (Toslink) cable, which the user guide describes as supplied already fitted to the unit, or a 3.5 mm analog jack cable. The formats matter more than the cables: the TV Connector receives and passes on Dolby Audio, in stereo or mono, but does not support DTS. Feed it DTS and it protests with a blinking red light rather than sound; the documented fix is to set the television's digital audio output to PCM or stereo in its audio menu, or to fall back to the analog cable.</p>
+
+<p>A word on names and versions, for anyone comparing listings. The unit on sale today is labelled V2 by retailers, and the operator-reviewed catalogue behind this guide sells it as the TV Connector V2. More than one hardware version exists - but no primary document we could verify states what changed between them, so this guide will not tell you, and treats version-difference claims found elsewhere with caution. Everything described here is the current unit, as documented in Phonak's own user guide and product information.</p>
+
+<figure>
+  <div class="figbox">
+  <svg viewBox="0 0 720 300" role="img" aria-labelledby="fig1title fig1desc" xmlns="http://www.w3.org/2000/svg">
+    <title id="fig1title">The living-room setup of the Phonak TV Connector</title>
+    <desc id="fig1desc">A television on the left connects to the TV Connector by an optical cable or a 3.5 mm analog cable. The TV Connector broadcasts by radio to several listeners within a 15 metre radius, each setting volume on their own aids, while the television speakers keep playing for everyone else.</desc>
+    <style>
+      .t1 { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; fill: #1d1d1b; }
+      .h1s { font-size: 15px; font-weight: 700; }
+      .b1 { font-size: 12.5px; fill: #52514e; }
+    </style>
+    <!-- TV -->
+    <rect x="28" y="60" width="110" height="72" rx="5" fill="none" stroke="#1d1d1b" stroke-width="2.5"/>
+    <line x1="58" y1="140" x2="108" y2="140" stroke="#1d1d1b" stroke-width="2.5"/>
+    <text x="83" y="102" text-anchor="middle" class="t1 h1s">TV</text>
+    <text x="83" y="168" text-anchor="middle" class="t1 b1">speakers keep playing</text>
+    <text x="83" y="184" text-anchor="middle" class="t1 b1">for everyone else</text>
+    <!-- cables -->
+    <line x1="138" y1="84" x2="238" y2="84" stroke="#1f5f3f" stroke-width="2.5"/>
+    <text x="188" y="74" text-anchor="middle" class="t1 b1" style="fill:#1f5f3f; font-weight:700;">optical (Toslink)</text>
+    <line x1="138" y1="112" x2="238" y2="112" stroke="#52514e" stroke-width="2.5" stroke-dasharray="6 5"/>
+    <text x="188" y="132" text-anchor="middle" class="t1 b1">or 3.5 mm analog</text>
+    <!-- TVC unit -->
+    <rect x="240" y="72" width="86" height="52" rx="8" fill="#1f5f3f"/>
+    <text x="283" y="94" text-anchor="middle" class="t1 h1s" style="fill:#ffffff;">TV</text>
+    <text x="283" y="112" text-anchor="middle" class="t1 h1s" style="fill:#ffffff;">Connector</text>
+    <text x="283" y="144" text-anchor="middle" class="t1 b1">one audio socket,</text>
+    <text x="283" y="160" text-anchor="middle" class="t1 b1">two cable options</text>
+    <!-- radio arcs -->
+    <path d="M 338 86 q 12 12 0 24" fill="none" stroke="#1f5f3f" stroke-width="2"/>
+    <path d="M 348 78 q 20 20 0 40" fill="none" stroke="#1f5f3f" stroke-width="2"/>
+    <path d="M 358 70 q 28 28 0 56" fill="none" stroke="#1f5f3f" stroke-width="2"/>
+    <!-- radius arc -->
+    <path d="M 300 36 Q 520 6 700 92" fill="none" stroke="#d9d6cd" stroke-width="2" stroke-dasharray="7 6"/>
+    <text x="516" y="26" text-anchor="middle" class="t1 b1">radio reach: a 15 metre (50 ft) radius, line of sight not required</text>
+    <!-- listeners -->
+    <g fill="none" stroke="#1d1d1b" stroke-width="2.4">
+      <circle cx="450" cy="120" r="13"/>
+      <line x1="450" y1="133" x2="450" y2="180"/>
+      <circle cx="545" cy="105" r="13"/>
+      <line x1="545" y1="118" x2="545" y2="165"/>
+      <circle cx="640" cy="125" r="13"/>
+      <line x1="640" y1="138" x2="640" y2="185"/>
+    </g>
+    <text x="545" y="215" text-anchor="middle" class="t1 h1s">listeners with compatible devices</text>
+    <text x="545" y="238" text-anchor="middle" class="t1 b1">an unlimited number may stream at once -</text>
+    <text x="545" y="254" text-anchor="middle" class="t1 b1">each sets volume on their own aids</text>
+    <text x="283" y="215" text-anchor="middle" class="t1 b1">walls, furniture and large</text>
+    <text x="283" y="231" text-anchor="middle" class="t1 b1">metal objects can shorten reach</text>
+  </svg>
+  </div>
+  <figcaption><b>Figure 1: the whole product in one room.</b> The TV Connector takes the television's sound by cable - optical or 3.5 mm analog into one socket - and rebroadcasts it as AirStream radio within a 15 metre (50 ft) radius. Phonak's product information states an unlimited number of listeners can stream simultaneously, each at a volume set on their own aids; the television's speakers keep playing for everyone else. The user guide notes walls, furniture and large metallic structures can reduce the range.</figcaption>
+</figure>
+
+<h2 id="living">Living with it: setup, the household, and the honest gaps</h2>
+
+<p>First connection is a proximity ritual, done once. With the unit powered and wired, you bring your hearing aids within 1 metre (3 ft) of it; the connection can take up to 10 seconds to confirm. After that it is remembered - whenever you come back into range while the television is playing, the aids reconnect automatically, and the unit's light tells you its state at a glance: green when transmitting, white when the source has gone silent and it is standing by, blinking blue while connecting, blinking red when it is being fed a format it cannot use.</p>
+
+<p>The household behaviour is the product's quiet strength. One unit serves an unlimited number of compatible devices simultaneously, so a couple - or three generations at one screen - need exactly one box. Each wearer's volume lives on their own aids; the buttons on the unit itself adjust the level of the stream, and the unit remembers its volume separately for each input type, so switching between the optical feed and the analog one does not mean re-finding your level.</p>
+
+<p>Phone calls behave sensibly: aids that take an incoming call interrupt the TV stream for the call and return to the stream afterwards, automatically. Nobody re-pairs anything because the phone rang.</p>
+
+<p>Now the honest gaps - there are two, and both are the manufacturer's to close. On speed: Phonak's product information describes the link's latency qualitatively - "lowest streaming latency" is the phrase - and no millisecond figure is published in any document we could verify, so this guide will not put a number on it. The user guide's practical fix: if the television's loudspeakers lag behind what you hear in your aids, reduce the TV's loudspeaker delay setting in its audio menu; and per the catalogue behind this guide, if streamed audio drifts against the picture on surround formats, setting the TV's output to PCM or stereo is the standard cure. On power: the unit runs from the mains via a USB power supply, or from a USB socket on the television itself - which on some sets means it powers up and down with the TV. The socket on the unit is micro-USB, per both the user guide and Phonak's datasheet; a deliberate search for any USB-C variant of this product found no manufacturer source naming one, so treat any description saying otherwise with caution and check the supplied cable.</p>
+
+<h3>For the AV-minded: outputs, soundbars and receivers</h3>
+
+<p>Opt-in depth for readers who own more than a television. The rule the user guide states plainly: connect the unit to an audio output, never an input. Between the two inputs it accepts, optical is the better citizen - the guide's own troubleshooting routes volume problems by moving from the analog cable to optical. The headphone socket route carries the classic catch, which the user guide states plainly: some TVs switch off their own loudspeakers when the headset socket is in use, leaving the set inaudible for everyone else in the room. The guide's fixes are to enable parallel loudspeaker use in the TV's audio settings where the set offers it, or to use the optical cable instead.</p>
+
+<p>Soundbars and AV receivers are where the manufacturer paperwork goes quiet. None of the primary documents we read covers the case where the television's only optical output already feeds a soundbar, or an HDMI ARC setup leaves no spare optical out. Community practice is to take a spare optical output on the AV receiver or soundbar where one exists, or to add an optical splitter - but that is forum-tier advice, not manufacturer guidance, so treat it as unverified and confirm before buying hardware around it. One UK-specific caution carried by the operator-reviewed catalogue behind this guide: Sky Glass televisions provide no usable audio output for external streamers, so the TV Connector cannot be used with Sky Glass; Sky Q and Sky Stream boxes, and any television with an optical or headphone output, are unaffected.</p>
+
+<h2 id="compatibility">Compatibility, precisely: the AirStream boundary</h2>
+
+<p>One honesty note before the lists. The platform-by-platform span below rests on the evidence-tiered catalogue research behind this guide, and that research itself flags the span for re-verification against Phonak's current published pages. The shape of the boundary is solid - AirStream devices connect, others do not - but treat the edges as something to confirm for your exact model rather than a promise; your audiologist settles it in a minute.</p>
+
+<p><b>Phonak hearing aids.</b> The current Phonak platforms carry AirStream: Infinio - including the flagship Audeo Infinio Ultra and the Sphere Infinio - along with Lumity and Paradise. Earlier but still AirStream-equipped are the Marvel platform and the Audeo B-Direct. The platform, not the shape of the aid, is what decides: per the catalogue research, Naida, Bolero, Sky and Virto models on those platforms are included alongside the Audeo range. Phonak platforms older than these do not carry AirStream at all - the excluded names are drawn precisely below, under who it is not for.</p>
+
+<p><b>NHS and high-street wearers.</b> If your aids came from an NHS audiology department and say Phonak - sometimes branded Nathos Nova - the family is AirStream-equipped - and that is the phrase worth using when you ask, because NHS provision varies by region and some fittings use models without AirStream. Check your fitting paperwork, or ask your audiology department whether your aids carry AirStream wireless, before spending anything. High-street and warehouse-club wearers face the same test wearing a shop's own brand name - the channel-by-channel translation is worked through in the questions further down.</p>
+
+<p><b>Unitron wearers.</b> Unitron is a Sonova sister brand, and the catalogue research behind this guide confirms the Phonak and Unitron TV Connector units share their hardware - Unitron sells the same product under its own packaging as the Unitron TV Connector. Recent wireless Unitron platforms receive AirStream; the exact model-by-model ladder is less firmly documented than Phonak's, so confirm your specific model. If your aids are Unitron, buy the Unitron-packaged unit; if Phonak, the Phonak one - the box should match the aids.</p>
+
+<p><b>Cochlear implant users - named, not footnoted.</b> On the implant side, Advanced Bionics is a Sonova company, and its current sound processors carry AirStream: the Naida CI M90, the current adult processor, and the Sky CI M90, its paediatric counterpart. Both connect to the TV Connector the same way Phonak aids do. The bimodal case is the one families ask about and the documentation answers directly: a wearer with a Phonak Naida Link M hearing aid on one ear and an AB cochlear implant on the other streams from a single TV Connector to both devices simultaneously - one box, both ears, one film. Older AB processors - the Naida CI Q series, Harmony, Neptune and Chorus - do not include AirStream and cannot connect; your CI team can advise on the listening accessories that do exist for those generations.</p>
+
+<figure>
+  <div class="figbox">
+  <svg viewBox="0 0 720 400" role="img" aria-labelledby="fig2title fig2desc" xmlns="http://www.w3.org/2000/svg">
+    <title id="fig2title">Who can receive AirStream from the TV Connector</title>
+    <desc id="fig2desc">The TV Connector on the left with arrows to three receiving groups: Phonak hearing aids on current and earlier AirStream platforms; Sonova family devices including Unitron aids, NHS AirStream-equipped Phonak and Kirkland Signature; and Advanced Bionics implant processors including the bimodal case. A bottom strip lists devices with no AirStream that cannot connect.</desc>
+    <style>
+      .t2 { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; fill: #1d1d1b; }
+      .h2s { font-size: 15px; font-weight: 700; }
+      .b2 { font-size: 12.5px; fill: #52514e; }
+      .grp { fill: #ffffff; stroke: #d9d6cd; stroke-width: 1.5; }
+      .grp-hi { fill: #e8f0ea; stroke: #1f5f3f; stroke-width: 2; }
+    </style>
+    <!-- unit -->
+    <rect x="22" y="118" width="120" height="84" rx="10" fill="#1f5f3f"/>
+    <text x="82" y="152" text-anchor="middle" class="t2 h2s" style="fill:#ffffff;">TV Connector</text>
+    <text x="82" y="172" text-anchor="middle" style="fill:#e8f0ea; font-size:12px; font-family:inherit;">AirStream radio</text>
+    <text x="82" y="188" text-anchor="middle" style="fill:#e8f0ea; font-size:12px; font-family:inherit;">2.4 GHz</text>
+    <!-- arrows -->
+    <g stroke="#52514e" stroke-width="2.2" fill="none">
+      <path d="M 142 140 Q 190 80 228 58"/>
+      <path d="M 142 160 Q 195 160 228 160"/>
+      <path d="M 142 180 Q 190 240 228 262"/>
+    </g>
+    <g fill="#52514e">
+      <polygon points="236,56 222,52 226,65"/>
+      <polygon points="236,160 223,154 223,167"/>
+      <polygon points="236,263 222,255 227,268"/>
+    </g>
+    <!-- group 1 -->
+    <rect x="240" y="14" width="466" height="88" rx="8" class="grp-hi"/>
+    <text x="256" y="38" class="t2 h2s">Phonak hearing aids on AirStream platforms</text>
+    <text x="256" y="57" class="t2 b2">Current: Infinio (incl. Audeo Infinio Ultra, Sphere Infinio), Lumity, Paradise</text>
+    <text x="256" y="73" class="t2 b2">Earlier platforms: Marvel, Audeo B-Direct</text>
+    <text x="256" y="89" class="t2 b2">Naida, Bolero, Sky and Virto models on those platforms included</text>
+    <!-- group 2 -->
+    <rect x="240" y="114" width="466" height="88" rx="8" class="grp"/>
+    <text x="256" y="138" class="t2 h2s">Sonova family, other names on the box</text>
+    <text x="256" y="157" class="t2 b2">Unitron aids on recent wireless platforms (its TV Connector is this same unit)</text>
+    <text x="256" y="173" class="t2 b2">NHS Phonak, sometimes branded Nathos Nova - AirStream-equipped as a family</text>
+    <text x="256" y="189" class="t2 b2">Costco Kirkland Signature KS9 / KS10, made by Sonova</text>
+    <!-- group 3 -->
+    <rect x="240" y="214" width="466" height="96" rx="8" class="grp"/>
+    <text x="256" y="238" class="t2 h2s">Advanced Bionics cochlear implant processors</text>
+    <text x="256" y="257" class="t2 b2">Naida CI M90 (current adult) and Sky CI M90 (paediatric)</text>
+    <text x="256" y="273" class="t2 b2">Bimodal: Naida Link M hearing aid + AB implant stream from</text>
+    <text x="256" y="289" class="t2 b2">one TV Connector, both devices simultaneously</text>
+    <!-- excluded strip -->
+    <rect x="22" y="326" width="684" height="62" rx="8" fill="#f6f5f1" stroke="#d9d6cd" stroke-width="1.5"/>
+    <text x="38" y="349" class="t2 h2s">No AirStream, no connection</text>
+    <text x="38" y="368" class="t2 b2">Phonak Quest, Venture, standard Belong; Phonak Lyric; AB Naida CI Q series, Harmony,</text>
+    <text x="38" y="382" class="t2 b2">Neptune, Chorus; all non-Sonova brands (each has its own maker's TV accessory instead)</text>
+  </svg>
+  </div>
+  <figcaption><b>Figure 2: the AirStream boundary.</b> Everything that can receive the TV Connector's stream carries Phonak's AirStream radio, whatever the name on the box; everything without it cannot connect at all. The platform span shown here follows the evidence-tiered catalogue research behind this guide, which flags it for re-verification against Phonak's current pages - confirm your exact model before buying.</figcaption>
+</figure>
+
+<h2 id="not-for">Who it is not for</h2>
+
+<p>The excluded group is defined by one missing radio. Phonak aids on the Quest, Venture or standard Belong platforms, the extended-wear Phonak Lyric - which has no wireless connectivity at all - the older Advanced Bionics processors named above, and every non-Sonova brand: none of these can receive AirStream from any transmitter. For other manufacturers' wearers the answer is usually the equivalent accessory from their aid's own family - each major maker sells its own dedicated TV device, and buying inside the family is the rule that avoids a drawer of incompatible boxes. Older Phonak wearers have routes of their own, covered in the questions further down and in the Roger comparison next.</p>
+
+<p>A second group can buy it but should not want it: people whose real problem is conversation. The TV Connector does nothing for a restaurant, a meeting or a family dinner - it has no microphone and never leaves the television. If seated group conversation is where your hearing fails, the <a href="../phonak-roger-select-3/">Roger Select 3</a> table microphone is the product built for that; if your difficult listening moves around, the <a href="../phonak-roger-on-3/">Roger On 3</a> is the all-situations tool. And the Roger On raises the one genuinely close decision, because seated in its docking station it also streams television.</p>
+
+<figure>
+  <div class="figbox">
+  <svg viewBox="0 0 720 300" role="img" aria-labelledby="fig3title fig3desc" xmlns="http://www.w3.org/2000/svg">
+    <title id="fig3title">Choosing between the TV Connector and the Roger On 3 dock</title>
+    <desc id="fig3desc">Two panels. Left: if television is the whole problem, the dedicated TV Connector - one job, mains powered, unlimited AirStream listeners. Right: if television is one problem among several, the Roger On 3 - a microphone first, TV streamer when docked, reaching devices through Roger receiver paths.</desc>
+    <style>
+      .t3 { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; fill: #1d1d1b; }
+      .h3s { font-size: 15px; font-weight: 700; }
+      .b3 { font-size: 12.5px; fill: #52514e; }
+    </style>
+    <rect x="10" y="10" width="343" height="280" rx="8" fill="#e8f0ea" stroke="#1f5f3f" stroke-width="2"/>
+    <rect x="367" y="10" width="343" height="280" rx="8" fill="#f6f5f1" stroke="#d9d6cd" stroke-width="1.5"/>
+    <!-- TVC panel -->
+    <text x="181" y="40" text-anchor="middle" class="t3 h3s">The TV is the whole problem</text>
+    <rect x="146" y="62" width="70" height="44" rx="8" fill="#1f5f3f"/>
+    <text x="181" y="89" text-anchor="middle" class="t3 h3s" style="fill:#ffffff;">box</text>
+    <text x="181" y="134" text-anchor="middle" class="t3 h3s" style="fill:#1f5f3f;">Phonak TV Connector</text>
+    <text x="181" y="162" text-anchor="middle" class="t3 b3">one job, done from the mains - nothing to charge</text>
+    <text x="181" y="180" text-anchor="middle" class="t3 b3">streams to AirStream devices only</text>
+    <text x="181" y="198" text-anchor="middle" class="t3 b3">unlimited listeners, each at their own volume</text>
+    <text x="181" y="216" text-anchor="middle" class="t3 b3">lives behind the television, set up once</text>
+    <text x="181" y="248" text-anchor="middle" class="t3 b3" style="font-weight:700;">this guide's subject</text>
+    <!-- Roger panel -->
+    <text x="538" y="40" text-anchor="middle" class="t3 h3s">The TV is one problem among several</text>
+    <rect x="512" y="66" width="52" height="20" rx="8" fill="#52514e"/>
+    <rect x="504" y="90" width="68" height="14" rx="4" fill="none" stroke="#52514e" stroke-width="2"/>
+    <text x="538" y="134" text-anchor="middle" class="t3 h3s">Roger On 3</text>
+    <text x="538" y="162" text-anchor="middle" class="t3 b3">a remote microphone first - conversation in noise</text>
+    <text x="538" y="180" text-anchor="middle" class="t3 b3">streams TV when seated in its dock</text>
+    <text x="538" y="198" text-anchor="middle" class="t3 b3">reaches devices via Roger receiver paths,</text>
+    <text x="538" y="216" text-anchor="middle" class="t3 b3">including many aids the TV Connector cannot serve</text>
+    <text x="538" y="248" text-anchor="middle" class="t3 b3" style="font-weight:700;">see our Roger On 3 guide</text>
+  </svg>
+  </div>
+  <figcaption><b>Figure 3: the one close decision.</b> Both products can put television sound into hearing devices. The TV Connector is the dedicated answer: mains-powered, permanently in place, streaming to an unlimited number of AirStream devices. The Roger On 3 is a remote microphone that also streams TV from its dock, and because it delivers through Roger receiver paths it can reach devices the TV Connector cannot - at the price of being a battery-powered multi-role tool rather than a set-and-forget box. Wearers whose only problem is the television rarely need the microphone.</figcaption>
+</figure>
+
+<h2 id="faq">Questions worth asking before you buy</h2>
+
+<dl class="faq">
+  <dt>Can several people use one TV Connector at the same time, each at their own volume?</dt>
+  <dd><p>Yes - this is the product's home ground. Phonak's product information states one unit streams to an unlimited number of listeners simultaneously; each wearer sets volume on their own aids, and anyone without hearing devices keeps listening to the television's speakers at the room's level - true with the usual optical or other non-headphone hookup; some TVs mute their own speakers when fed from the headphone socket, a caveat covered in the AV notes above. One detail worth knowing: during the connection process the unit connects to any compatible aid in range, so a household sets up in one pass - and a visiting relative's compatible aids can join film night just as easily.</p></dd>
+
+  <dt>Will the streamed sound stay in step with the picture?</dt>
+  <dd><p>That is the design intent - Phonak's product information describes the link with the phrase "lowest streaming latency" - but the wording is qualitative and no millisecond figure is published, so we will not put a number on it. If the television's loudspeakers lag behind what you hear in your aids, the user guide's documented fix is to reduce the TV's loudspeaker delay setting in its audio menu; and if streamed sound misbehaves on surround formats, setting the TV's digital output to PCM or stereo is the standard cure.</p></dd>
+
+  <dt>What happens when my phone rings mid-film?</dt>
+  <dd><p>The call wins, then the film comes back. Aids that take an incoming phone call interrupt the TV stream for the call and return to it automatically afterwards - documented behaviour, with no re-pairing and no button-pressing involved. Only your own aids leave the stream; everyone else keeps watching uninterrupted.</p></dd>
+
+  <dt>My aids came from the NHS, or from a high-street chain - will it work with them?</dt>
+  <dd><p>Often yes, and the test is one question: do your aids carry AirStream wireless? NHS Phonak aids - sometimes branded Nathos Nova - are AirStream-equipped as a family, but NHS provision varies by region and some fittings use models without it, so check your fitting paperwork or ask your audiology department, using the word AirStream. From high-street and warehouse channels: Costco's Kirkland Signature KS9 and KS10 are made by Sonova and sit inside the compatible family per the catalogue research; other shops' own-brand ranges mix manufacturers, so ask who made your aids and whether they have AirStream before buying.</p></dd>
+
+  <dt>I have an Advanced Bionics cochlear implant - does this work with my sound processor?</dt>
+  <dd><p>Yes, with the current generation: the Naida CI M90 (adult) and Sky CI M90 (paediatric) both carry AirStream and connect exactly as Phonak aids do. Bimodal wearers are the best-served case of all: a Phonak Naida Link M hearing aid worn alongside an AB implant streams with it from a single TV Connector, both devices simultaneously. Older AB processors - the Naida CI Q series, Harmony, Neptune and Chorus - do not carry AirStream and cannot connect; your CI team can advise on the accessories that exist for those generations.</p></dd>
+
+  <dt>What about older Phonak models?</dt>
+  <dd><p>Phonak platforms that predate AirStream cannot pair with the TV Connector, and no Phonak document we consulted describes a way of adding AirStream to an existing aid. Wearers of those models once streamed television through Phonak's ComPilot and TVLink S accessories, which the catalogue records behind this guide list as discontinued. The practical modern routes are two: a hearing aid upgrade, or the Roger system - whose receiver paths reach many older and non-Phonak devices, and whose microphones stream TV when docked. Our Roger On 3 guide covers those paths.</p></dd>
+
+  <dt>Is a second-hand TV Connector a sensible buy?</dt>
+  <dd><p>It can be, and more straightforwardly than most hearing accessories: no licence or installation-count system appears anywhere in the user guide or product information documents read for this guide, so a used unit has no licence pool to arrive empty - connection is the same unlimited, re-runnable process as new. Two cautions. First, more than one hardware version exists and no verified primary document states what separates them - establish exactly which unit is being sold. Second, check that the cables come with it - the unit powers over micro-USB and takes an optical or 3.5 mm audio cable, all ordinary replaceable parts, but a complete box saves the hunt.</p></dd>
+</dl>
+
+<h2 id="sources">Sources and independence</h2>
+
+<div class="sources">
+<p>The product facts in this guide rest on Phonak's own documents, read in full from the operator's document archive: the TV Connector user guide (document 029-0737, carrying the manufacturer's own "CE mark applied: 2018" imprint - the source for the range, pairing, connection, format, LED, phone-call and troubleshooting behaviour cited here), Phonak's product information for its wireless accessories in two independent editions (the Marvel-era document 027-0511-02 and an Australian edition, which agree on the housing dimensions, the unlimited-listener statement and the latency wording), the operator-reviewed retail catalogue listing for this product, and evidence-tiered catalogue research on the AirStream ecosystem verified against those sources. Where the record runs out, this guide says so instead of estimating: no latency figure in milliseconds is published anywhere we could verify; no verified primary document states what changed between hardware versions; the product's place in Phonak's current line-up is not asserted in either direction; and no verified UK retail price was available at the time of writing, so this guide carries none.</p>
+</div>
+
+<footer class="independence">
+  <p>This is an independent editorial guide. It is not affiliated with, endorsed by, or sponsored by Sonova AG or any of its brands. Phonak, AirStream, TV Connector, Roger, RogerDirect, Audeo and Naida are trademarks of Sonova AG; Advanced Bionics and Unitron are Sonova group companies. Dolby and Dolby Audio are trademarks of Dolby Laboratories. DTS, Sky, Sky Glass, Sky Q, Sky Stream, Kirkland Signature and all other product names are trademarks of their respective owners. Product capabilities change between firmware and platform generations - for a purchase decision, confirm compatibility for your exact devices with a hearing care professional.</p>
+  <p>Published 5 August 2026.</p>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can several people use one TV Connector at the same time, each at their own volume?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes - Phonak's product information states one unit streams to an unlimited number of listeners simultaneously, each setting volume on their own aids, while the television's speakers keep playing for everyone else (true with the usual optical or other non-headphone hookup; some TVs mute their own speakers when fed from the headphone socket). During connection the unit connects to any compatible aid in range, so a household sets up in one pass and a visitor's compatible aids can join just as easily." }
+    },
+    {
+      "@type": "Question",
+      "name": "Will the streamed sound stay in step with the picture?",
+      "acceptedAnswer": { "@type": "Answer", "text": "That is the design intent - Phonak describes the link as having the lowest streaming latency - but the wording is qualitative and no figure is published, so this guide quotes none. If the TV's loudspeakers lag behind the stream, the user guide's fix is to reduce the TV's loudspeaker delay setting; on surround formats, set the TV's digital output to PCM or stereo." }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens when my phone rings mid-film?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The call wins, then the film comes back: aids that take an incoming call interrupt the TV stream for the call and return to it automatically afterwards, with no re-pairing involved. Only your own aids leave the stream - everyone else keeps watching." }
+    },
+    {
+      "@type": "Question",
+      "name": "My aids came from the NHS, or from a high-street chain - will it work with them?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Often yes - the test is whether your aids carry AirStream wireless. NHS Phonak aids, sometimes branded Nathos Nova, are AirStream-equipped as a family, but provision varies and some fittings lack AirStream, so check your paperwork or ask your audiology department. Costco's Kirkland Signature KS9 and KS10 are made by Sonova and sit inside the compatible family; other own-brand ranges mix manufacturers, so ask who made your aids and whether they have AirStream." }
+    },
+    {
+      "@type": "Question",
+      "name": "I have an Advanced Bionics cochlear implant - does this work with my sound processor?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, with the current generation: the Naida CI M90 (adult) and Sky CI M90 (paediatric) carry AirStream and connect as Phonak aids do. A bimodal wearer with a Phonak Naida Link M hearing aid alongside an AB implant streams from a single TV Connector to both devices simultaneously. Older AB processors - Naida CI Q series, Harmony, Neptune and Chorus - lack AirStream and cannot connect." }
+    },
+    {
+      "@type": "Question",
+      "name": "What about older Phonak models?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Phonak platforms that predate AirStream cannot pair with the TV Connector, and no Phonak document consulted describes adding AirStream to an existing aid. The former routes for those wearers, the ComPilot and TVLink S, are listed as discontinued in the catalogue records behind this guide. The modern options are an aid upgrade, or the Roger system, whose receiver paths reach many older and non-Phonak devices and whose microphones stream TV when docked." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is a second-hand TV Connector a sensible buy?",
+      "acceptedAnswer": { "@type": "Answer", "text": "It can be: no licence or installation-count system appears in the user guide or product information read for this guide, so a used unit has no licence pool to arrive empty. Two cautions: more than one hardware version exists and no verified primary states what separates them, so establish which unit is being sold; and check the cables are included - the unit powers over micro-USB and takes an optical or analog audio cable." }
+    }
+  ]
+}
+</script>
+
+</main>
+</body>
+</html>

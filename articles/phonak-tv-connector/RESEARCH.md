@@ -151,7 +151,11 @@ practical material manufacturer PAGES skip is in the user GUIDE:
   Volume memory is stored independently per input type.
 - TV headphone-out behaviour, stated by Phonak: "Some TVs will switch off their
   loudspeakers when using the headset socket - the TV will not be audible for
-  other people." Fix in guide: enable parallel loudspeaker use in TV audio
+  other people." (Record note, 2026-08-05 review: the guide's own punctuation
+  between the clauses is an en-dash, normalised to ASCII " - " in this record;
+  because house style cannot reproduce the dash inside quotation marks, the
+  article PARAPHRASES this sentence rather than quoting it, per CONV S-72.)
+  Fix in guide: enable parallel loudspeaker use in TV audio
   settings, or use the optical cable.
 - Lip-sync/delay: if TV loudspeaker audio lags the streamed audio, REDUCE the
   TV's loudspeaker delay setting in its audio menu (guide FAQ). If streamed audio
