@@ -6,6 +6,30 @@ standing lessons applied from the start: Drive route first, a filename's generat
 claim is never trusted over the document's own imprint, snippets are secondary-tier,
 failures recorded honestly.
 
+## 0. SPEC-DIV-1 resolution evidence (2026-08-05 ~01:00Z, appended after grounding)
+
+Targeted web search on the power-connector divergence. FOR micro-USB: the
+official datasheet snippet (datasheet_phonak_tv_connector.pdf, phonak.com
+master-assets and phonakpro mirrors) states power supply 5 VDC, max
+500 mA, micro-USB plug, "microUSB power socket"; both user-guide
+generations are consistent with it - gen 1 is doc 029-0515 (V1.00) and
+the current guide is doc 029-0737 (V2.00 in the live URL - the SAME
+document line held in the Drive archive, so its 2018 CE mark is the
+product's certification date, not evidence the guide predates the shipped
+unit). AGAINST micro-USB: a counter-search deliberately hunting any
+USB-C attribution to any TV Connector revision in any year returned
+ZERO sources. Verdict: micro-USB is corroborated by the datasheet
+(snippet tier) plus the Drive primaries (CONFIRMED with extraction
+caveat) plus the absence of any USB-C source; the shipped listing's
+USB-C claim has no discoverable basis, and its likely origin is the
+Bernafon TV-A donor clone noted in T15 sec 6.1. Listing-side correction
+is the operator's lane (SPEC-DIV-1 remains theirs to close, ideally with
+a physical-unit check as final confirmation); for the ARTICLE, micro-USB
+charging may be stated with this combined citation, though the physical
+check is noted as outstanding. Bonus from the same pass: the two
+user-guide doc numbers (029-0515 gen 1, 029-0737 current) pin the guide
+generations the version-history section could not previously separate.
+
 ## 1. The Drive route (operator archive, read this session)
 
 Standing extraction caveat, stated once for every Drive file below: the Drive tool
