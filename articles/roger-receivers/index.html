@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phonak Roger receivers: an independent guide</title>
+<style>
+  :root {
+    --ink: #1d1d1b;
+    --ink-soft: #52514e;
+    --ink-faint: #6e6d69;
+    --paper: #ffffff;
+    --paper-tint: #f6f5f1;
+    --rule: #d9d6cd;
+    --accent: #1f5f3f;
+    --accent-soft: #e8f0ea;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+  }
+  main {
+    max-width: 44rem;
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem 4rem 1.25rem;
+  }
+  header.masthead {
+    border-bottom: 3px solid var(--ink);
+    padding-bottom: 1.4rem;
+    margin-bottom: 2rem;
+  }
+  .kicker {
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin: 0 0 0.6rem 0;
+  }
+  h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+    margin: 0 0 0.8rem 0;
+    letter-spacing: -0.01em;
+  }
+  .standfirst {
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  h2 {
+    font-size: 1.35rem;
+    line-height: 1.3;
+    margin: 2.6rem 0 0.9rem 0;
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--rule);
+  }
+  h3 {
+    font-size: 1.05rem;
+    margin: 1.6rem 0 0.5rem 0;
+  }
+  p { margin: 0 0 1rem 0; }
+  ul, ol { margin: 0 0 1rem 1.3rem; padding: 0; }
+  li { margin-bottom: 0.45rem; }
+  a { color: var(--accent); }
+  .scope {
+    background: var(--paper-tint);
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.2rem;
+    margin: 0 0 1rem 0;
+    font-size: 0.98rem;
+  }
+  .inbrief {
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    background: var(--paper);
+    padding: 1rem 1.2rem;
+    margin: 1.4rem 0 0.4rem 0;
+    font-size: 0.95rem;
+  }
+  .inbrief p { margin: 0 0 0.4rem 0; }
+  .inbrief ul { margin: 0 0 0 1.1rem; }
+  .inbrief li { margin-bottom: 0.35rem; }
+  .pagenav {
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    margin: 0.8rem 0 0.4rem 0;
+  }
+  .pagenav a { color: var(--accent); text-decoration: none; }
+  .pagenav a:hover { text-decoration: underline; }
+  h2 { scroll-margin-top: 1rem; }
+  figure {
+    margin: 1.8rem 0;
+    padding: 0;
+  }
+  .figbox {
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 0.9rem;
+    background: var(--paper);
+    overflow-x: auto;
+  }
+  figure svg { display: block; width: 100%; height: auto; max-width: 100%; }
+  @media (max-width: 640px) {
+    figure svg { min-width: 620px; }
+  }
+  figcaption {
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    margin-top: 0.6rem;
+    line-height: 1.5;
+  }
+  figcaption b { color: var(--ink); }
+  dl.faq { margin: 0; }
+  dl.faq dt {
+    font-weight: 700;
+    margin: 1.4rem 0 0.35rem 0;
+  }
+  dl.faq dd { margin: 0 0 0 0; }
+  .sources {
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+  }
+  .sources p { margin-bottom: 0.7rem; }
+  footer.independence {
+    margin-top: 2.5rem;
+    padding-top: 1.2rem;
+    border-top: 3px solid var(--ink);
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+    line-height: 1.55;
+  }
+  @media (max-width: 480px) {
+    body { font-size: 16px; }
+    h1 { font-size: 1.6rem; }
+    h2 { font-size: 1.2rem; }
+    main { padding: 1.8rem 1rem 3rem 1rem; }
+  }
+  @media print {
+    main { max-width: none; }
+    .figbox { border-color: #000; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<header class="masthead">
+  <p class="kicker">Independent guide &middot; Hearing accessories</p>
+  <h1>Phonak Roger receivers: how the microphone's signal actually gets into your hearing aids</h1>
+  <p class="standfirst">Every Phonak Roger system is two halves: a wireless microphone near the talker, and a receiver path carrying the sound into your hearing aids or cochlear implant sound processors - Advanced Bionics processors among them. The receiver path decides whether the system works for you at all, and it is where the second-hand market's licence anxieties live. This guide covers that half in full: RogerDirect licences, the worn NeckLoop, the Roger X in its (02) and (03) options, design-integrated receivers, and buying used.</p>
+</header>
+
+<section aria-label="Scope">
+  <div class="scope">
+    <p style="margin:0;"><b>What this guide covers.</b> The receiving side of Phonak's Roger wireless microphone system: how a Roger signal gets into a hearing device, which receiver each device needs, how receiver licences are installed, moved and emptied, and what to check before buying used equipment. It is written for wearers of Phonak and Unitron hearing aids, for wearers of any manufacturer's devices with a T-coil or direct audio input, and for cochlear implant users - Advanced Bionics, Cochlear and MED-EL processors are covered by name from Phonak's own tables. The microphones themselves have guides of their own, linked throughout. This is an editorial guide, independent of the manufacturer; every product fact in it is sourced, and the sources are listed at the end.</p>
+  </div>
+</section>
+
+<div class="inbrief">
+  <p><b>In brief.</b></p>
+  <ul>
+    <li>A Roger microphone does nothing on its own. Sound reaches a hearing device down one of four receiver paths: a RogerDirect licence installed inside compatible devices, the worn Roger NeckLoop for anything with a T-coil, the plug-in Roger X for direct-audio-input and streamer setups, or a design-integrated snap-on shaped for one specific device.</li>
+    <li>Licences are the anxious part: current Roger 3 microphones carry unlimited receivers and install them themselves; the earlier iN microphones carry exactly two; a Roger X carries one - and once that licence is transferred into a hearing device, the Roger X is empty until a licence is moved back.</li>
+    <li>Phonak's 2023-era documents tie the Roger X install route to serial numbers higher than 1744xxxx, and the tool that moves licences - the Roger Installer - is professional equipment, not retail.</li>
+    <li>No document we could reach gives a consumer a way to check a used Roger X's licence state before buying. That is the honest answer to the most-asked second-hand question; the workable protections are below.</li>
+    <li>The Roger NeckLoop is the universal route: a 34 g unit worn on a neck loop, USB-C charging, more than 10 hours per charge, working through the T-coil, a cross-industry standard.</li>
+    <li>Advanced Bionics implant users are covered by name: the current Naida CI M and Sky CI M take RogerDirect; the older processors' routes, and the conditions attached to them, are set out below.</li>
+  </ul>
+  <p class="pagenav">On this page: <a href="#paths">The four ways in</a> &middot; <a href="#licences">The licence system</a> &middot; <a href="#hardware">The hardware</a> &middot; <a href="#implants">Cochlear implants</a> &middot; <a href="#second-hand">Second-hand</a> &middot; <a href="#not-for">Who should not buy</a> &middot; <a href="#faq">Questions</a> &middot; <a href="#sources">Sources</a></p>
+</div>
+
+<h2 id="paths">The four ways in</h2>
+
+<p>Start with the half nobody advertises. A Roger microphone transmits on Phonak's own 2.4 GHz protocol, and no ordinary hearing aid can hear it unaided - the Bluetooth your aids use for phone calls is a different radio. Reception belongs to a Roger receiver: circuitry already inside the device and activated by an installed licence, or added as hardware. Which one you need is decided by the device you wear, so this guide is organised the way Phonak's tables are - by device.</p>
+
+<p>The first way in is RogerDirect: receiver circuitry built into Phonak Infinio, Lumity, Paradise and Marvel aids, the latest Unitron models - and, per the catalogue research behind this guide, the equivalent Hansaton models - plus the Advanced Bionics Naida CI M and Sky CI M sound processors. RogerDirect is a licence, not an object: nothing is worn, nothing arrives in a box, and you cannot buy it on its own - a receiver is installed from a microphone or, professionally, from a Roger X. A small set of Phonak Virto custom models is the exception: no RogerDirect, T-coil route instead.</p>
+
+<p>The second is the Roger NeckLoop, worn around the neck: it passes sound inductively to any device switched to its T-coil program, whoever made it - implant processors included. The third is the Roger X, a plug-in receiver smaller than a fingernail, for devices with a direct audio input socket, an audio shoe, or the maker's own Europlug streaming accessory - Phonak's third-party table names the Oticon Streamer Pro, GN ReSound MultiMic and Starkey Remote Microphone + as examples. The fourth is a design-integrated receiver: a snap-on shaped for one specific device. A fifth answer belongs in print: a device with none of the four has no Roger path at all - a group concentrated among the smallest in-canal customs and many low-cost over-the-counter aids. NHS wearers will find the Nathos-specific split in our <a href="../phonak-roger-on-3/">Roger On 3 guide</a>.</p>
+
+<figure>
+  <div class="figbox">
+  <svg viewBox="0 0 720 500" role="img" aria-labelledby="fig1title fig1desc" xmlns="http://www.w3.org/2000/svg">
+    <title id="fig1title">Which Roger receiver path fits which hearing device</title>
+    <desc id="fig1desc">Four device types on the left each point to their receiver path on the right: RogerDirect platforms take an installed licence; T-coil devices take the NeckLoop; direct audio input and streamer setups take the Roger X; selected implant processors and earlier Phonak aids take design-integrated receivers. A bottom strip notes that devices with none of the four have no Roger path.</desc>
+    <style>
+      .t1 { font-family: inherit; fill: #1d1d1b; }
+      .h1s { font-size: 14px; font-weight: 700; }
+      .b1 { font-size: 12.5px; fill: #52514e; }
+      .lbox { fill: #f6f5f1; stroke: #d9d6cd; stroke-width: 1.5; }
+      .rbox { fill: #ffffff; stroke: #1f5f3f; stroke-width: 2; }
+    </style>
+    <text x="20" y="30" class="t1 h1s">The device you wear</text>
+    <text x="392" y="30" class="t1 h1s" style="fill:#1f5f3f;">Its receiver path</text>
+    <!-- row 1 -->
+    <rect x="20" y="44" width="310" height="78" rx="8" class="lbox"/>
+    <text x="36" y="70" class="t1 h1s">Phonak Infinio, Lumity, Paradise, Marvel</text>
+    <text x="36" y="88" class="t1 b1">latest Unitron models; AB Naida CI M and</text>
+    <text x="36" y="104" class="t1 b1">Sky CI M processors</text>
+    <rect x="390" y="44" width="310" height="78" rx="8" class="rbox"/>
+    <text x="406" y="70" class="t1 h1s" style="fill:#1f5f3f;">RogerDirect</text>
+    <text x="406" y="88" class="t1 b1">a licence installed inside the device; nothing</text>
+    <text x="406" y="104" class="t1 b1">worn. A Roger 3 microphone installs it itself.</text>
+    <line x1="330" y1="83" x2="384" y2="83" stroke="#52514e" stroke-width="2"/>
+    <polygon points="390,83 378,77 378,89" fill="#52514e"/>
+    <!-- row 2 -->
+    <rect x="20" y="138" width="310" height="78" rx="8" class="lbox"/>
+    <text x="36" y="164" class="t1 h1s">Any make with a T-coil program</text>
+    <text x="36" y="182" class="t1 b1">hearing aids and implant processors alike,</text>
+    <text x="36" y="198" class="t1 b1">from any manufacturer</text>
+    <rect x="390" y="138" width="310" height="78" rx="8" class="rbox"/>
+    <text x="406" y="164" class="t1 h1s" style="fill:#1f5f3f;">Roger NeckLoop</text>
+    <text x="406" y="182" class="t1 b1">worn around the neck; the sound arrives</text>
+    <text x="406" y="198" class="t1 b1">through the T-coil program.</text>
+    <line x1="330" y1="177" x2="384" y2="177" stroke="#52514e" stroke-width="2"/>
+    <polygon points="390,177 378,171 378,183" fill="#52514e"/>
+    <!-- row 3 -->
+    <rect x="20" y="232" width="310" height="78" rx="8" class="lbox"/>
+    <text x="36" y="258" class="t1 h1s">Direct audio input or audio shoe</text>
+    <text x="36" y="276" class="t1 b1">or the maker's own Europlug streaming</text>
+    <text x="36" y="292" class="t1 b1">accessory</text>
+    <rect x="390" y="232" width="310" height="78" rx="8" class="rbox"/>
+    <text x="406" y="258" class="t1 h1s" style="fill:#1f5f3f;">Roger X</text>
+    <text x="406" y="276" class="t1 b1">plug-in receiver on the three-pin Europlug,</text>
+    <text x="406" y="292" class="t1 b1">powered by the aid's own battery.</text>
+    <line x1="330" y1="271" x2="384" y2="271" stroke="#52514e" stroke-width="2"/>
+    <polygon points="390,271 378,265 378,277" fill="#52514e"/>
+    <!-- row 4 -->
+    <rect x="20" y="326" width="310" height="78" rx="8" class="lbox"/>
+    <text x="36" y="352" class="t1 h1s">Selected implant processors</text>
+    <text x="36" y="370" class="t1 b1">and earlier Phonak aids mapped in the</text>
+    <text x="36" y="386" class="t1 b1">2023-edition tables</text>
+    <rect x="390" y="326" width="310" height="78" rx="8" class="rbox"/>
+    <text x="406" y="352" class="t1 h1s" style="fill:#1f5f3f;">Design-integrated receiver</text>
+    <text x="406" y="370" class="t1 b1">snap-on, chosen by a model-specific number;</text>
+    <text x="406" y="386" class="t1 b1">current set: Roger 14, 17, 20 and 21.</text>
+    <line x1="330" y1="365" x2="384" y2="365" stroke="#52514e" stroke-width="2"/>
+    <polygon points="390,365 378,359 378,371" fill="#52514e"/>
+    <!-- dead end strip -->
+    <rect x="20" y="420" width="680" height="64" rx="8" fill="#f6f5f1" stroke="#d9d6cd" stroke-width="1.5"/>
+    <text x="36" y="442" class="t1 h1s">None of the four?</text>
+    <text x="36" y="460" class="t1 b1">Then Roger cannot reach the device - most common among the smallest</text>
+    <text x="36" y="476" class="t1 b1">in-canal customs and budget over-the-counter aids.</text>
+  </svg>
+  </div>
+  <figcaption><b>Figure 1: which receiver path is yours.</b> The path is set by the device you wear, not by preference. Phonak sets the floor itself: Roger, it states, works with virtually every hearing aid and cochlear implant carrying a direct audio input or T-coil - "virtually" is the manufacturer's own hedge, kept deliberately, and the bottom strip is who it excludes. Platform lists per Phonak's professional reference; the Hansaton extension rests on the catalogue research behind this guide.</figcaption>
+</figure>
+
+<h2 id="licences">The licence system: pools, moves, and the 1744xxxx boundary</h2>
+
+<p>For RogerDirect devices the receiver is installable software, and it lives somewhere at all times: in a microphone's pool, in a Roger X, or installed in a hearing device. The current Roger 3 microphones - Roger On 3, Roger Select 3, Roger Table Mic 3 and Roger Touchscreen Mic 3 - carry unlimited receivers built inside the transmitter; Phonak is explicit about what that removes: no uninstalling after a trial, no re-ordering when an aid is lost or replaced. The earlier iN microphones carry exactly two receivers - one pair of aids, then their pool is empty. A Roger X carries one.</p>
+
+<p>Licences move, and every move empties its source. Phonak's knowledge-base sentence is the one to memorise: "Once a Roger receiver's license is transferred to one hearing device, the Roger X is empty." (The American spelling is Phonak's.) The move is reversible - Phonak's own demonstration workflow uninstalls receivers from hearing aids back into a Roger X - but both directions run through the Roger Installer, a tool Phonak lists for hearing care professionals, school audiologists and school personnel, never consumers. Licence moves mean a professional visit. The friendly exception: microphones with unlimited or iN receivers install directly into RogerDirect devices themselves, held next to each aid in turn - no tool, no appointment.</p>
+
+<p>One boundary crosses the Roger X route. The 2023 editions of Phonak's Rogerpedia state that a receiver can be installed "via a Roger X (with serial number higher than 1744xxxx) and the Roger Installer", and the Roger X (02) datasheet attaches the same serial condition to its install feature. A hedge goes on the record here: the 2024 Australian edition keeps the path but no longer restates the serial sentence - treat the cutoff as Phonak's 2023-era published position, confirmed by the professional on the unit in front of you. What the digits encode is published nowhere we could reach. The boundary is published against the install feature specifically, not against the Roger X's ordinary life as a plug-in receiver.</p>
+
+<figure>
+  <div class="figbox">
+  <svg viewBox="0 0 720 350" role="img" aria-labelledby="fig2title fig2desc" xmlns="http://www.w3.org/2000/svg">
+    <title id="fig2title">Where Roger receiver licences live and how they move</title>
+    <desc id="fig2desc">Three sources on the left hold licences: Roger 3 microphones with an unlimited pool, iN microphones with exactly two, and the Roger X with one. Arrows show installs into a RogerDirect hearing device on the right. The Roger X route passes through the Roger Installer, a professional tool, with a serial-number boundary noted, and a return arrow shows that uninstalling moves a licence back.</desc>
+    <style>
+      .t2 { font-family: inherit; fill: #1d1d1b; }
+      .h2s { font-size: 14px; font-weight: 700; }
+      .b2 { font-size: 12.5px; fill: #52514e; }
+      .src { fill: #ffffff; stroke: #d9d6cd; stroke-width: 1.5; }
+    </style>
+    <!-- sources -->
+    <rect x="20" y="24" width="230" height="62" rx="8" fill="#e8f0ea" stroke="#1f5f3f" stroke-width="2"/>
+    <text x="36" y="48" class="t2 h2s">Roger 3 microphones</text>
+    <text x="36" y="66" class="t2 b2">unlimited receivers built in</text>
+    <rect x="20" y="104" width="230" height="62" rx="8" class="src"/>
+    <text x="36" y="128" class="t2 h2s">iN microphones (earlier)</text>
+    <text x="36" y="146" class="t2 b2">exactly two receivers, then empty</text>
+    <rect x="20" y="184" width="230" height="62" rx="8" class="src"/>
+    <text x="36" y="208" class="t2 h2s">Roger X</text>
+    <text x="36" y="226" class="t2 b2">one receiver; empty after transfer</text>
+    <text x="20" y="272" class="t2 b2">install path stated for serial numbers higher</text>
+    <text x="20" y="288" class="t2 b2">than 1744xxxx (2023 editions and datasheet;</text>
+    <text x="20" y="304" class="t2 b2">not restated in the 2024 edition)</text>
+    <!-- installer gate -->
+    <rect x="330" y="184" width="180" height="62" rx="8" fill="#f6f5f1" stroke="#d9d6cd" stroke-width="1.5"/>
+    <text x="346" y="208" class="t2 h2s">Roger Installer</text>
+    <text x="346" y="226" class="t2 b2">professional tool, not retail</text>
+    <!-- target -->
+    <rect x="560" y="84" width="140" height="122" rx="10" fill="#ffffff" stroke="#1f5f3f" stroke-width="2"/>
+    <text x="576" y="112" class="t2 h2s">RogerDirect</text>
+    <text x="576" y="130" class="t2 h2s">hearing device</text>
+    <text x="576" y="152" class="t2 b2">aid or AB CI M</text>
+    <text x="576" y="168" class="t2 b2">processor; licence</text>
+    <text x="576" y="184" class="t2 b2">activates reception</text>
+    <!-- arrows: direct installs -->
+    <path d="M 250 55 Q 430 55 566 96" fill="none" stroke="#1f5f3f" stroke-width="2.2"/>
+    <polygon points="572,99 558,94 561,105" fill="#1f5f3f"/>
+    <text x="330" y="46" class="t2 b2" style="fill:#1f5f3f; font-weight:700;">installs itself, held next to the aid</text>
+    <path d="M 250 135 Q 400 135 562 128" fill="none" stroke="#52514e" stroke-width="2"/>
+    <polygon points="568,127 555,123 556,134" fill="#52514e"/>
+    <text x="330" y="126" class="t2 b2">installs itself - pool empties at two</text>
+    <!-- Roger X path through installer -->
+    <line x1="250" y1="215" x2="324" y2="215" stroke="#52514e" stroke-width="2"/>
+    <polygon points="330,215 318,209 318,221" fill="#52514e"/>
+    <path d="M 510 200 Q 545 185 556 172" fill="none" stroke="#52514e" stroke-width="2"/>
+    <polygon points="561,166 549,169 556,178" fill="#52514e"/>
+    <!-- uninstall return -->
+    <path d="M 590 220 Q 420 330 254 240" fill="none" stroke="#1d1d1b" stroke-width="2" stroke-dasharray="6 5"/>
+    <polygon points="248,236 260,236 254,247" fill="#1d1d1b"/>
+    <text x="330" y="318" class="t2 b2">uninstall reverses the move - the licence returns</text>
+    <text x="330" y="334" class="t2 b2">to the Roger X (same professional tool)</text>
+  </svg>
+  </div>
+  <figcaption><b>Figure 2: where licences live and how they move.</b> A receiver licence always sits somewhere - a microphone's pool, a Roger X, or a hearing device - and installs empty their source: a Roger X is empty once its licence transfers, an iN pool after its two installs. Uninstalling moves a licence back into a Roger X. Both directions of the Roger X route run through the Roger Installer, which Phonak lists for hearing care professionals, school audiologists and school personnel. The serial boundary is stated in the 2023 editions and the Roger X (02) datasheet; the 2024 Australian edition keeps the path but not the sentence.</figcaption>
+</figure>
+
+<h2 id="hardware">The hardware: NeckLoop, Roger X, design-integrated</h2>
+
+<h3>Roger NeckLoop - the universal receiver</h3>
+
+<p>First, what the Roger NeckLoop is not: an installable licence - it never touches the RogerDirect system. It is a bridge, worn like a lanyard - the unit on the chest, the inductive loop around the neck - and any hearing device switched to its T-coil program picks the sound up from the loop. Both versions, (02) and (03), are Phonak's own designations: the user guide's imprint covers the pair, and one datasheet serves both, marking exactly two features as (02)-only - the Check readout of device data via a Roger microphone with the Check function, and Roger Pass-around compatibility.</p>
+
+<p>The numbers, from that datasheet: 70 x 39 x 18 mm; 34 g, or 52 g with the standard 750 mm loop (a 550 mm short loop exists); a fixed 250 mAh battery charging over USB-C - 80 percent in an hour, full in under 3 hours - for more than 10 hours per charge; transmission delay under 20 ms; adaptive gain of up to 20 dB as noise rises. You connect once: T-coil program on, NeckLoop within 10 cm of the microphone, Connect pressed on the microphone, not the loop. Two notes from Phonak's guide, carried in the operator-reviewed catalogue behind this guide: the T-coil program is often not enabled by default, so one audiology visit may come first; and a volume limiter, set with a pin tool within 30 seconds of startup, caps the output - intended for headphone use on the 3.5 mm jack, worth setting for a child.</p>
+
+<figure>
+  <div class="figbox">
+  <svg viewBox="0 0 720 340" role="img" aria-labelledby="fig3title fig3desc" xmlns="http://www.w3.org/2000/svg">
+    <title id="fig3title">The Roger NeckLoop and its manufacturer figures</title>
+    <desc id="fig3desc">A drawing of the NeckLoop: a receiver unit hanging on an inductive neck loop, with labels giving the datasheet figures for loop lengths, weight, dimensions, charging, operating time, transmission delay, headphone output and the volume limiter.</desc>
+    <style>
+      .t3 { font-family: inherit; fill: #1d1d1b; }
+      .h3s { font-size: 14px; font-weight: 700; }
+      .b3 { font-size: 12.5px; fill: #52514e; }
+    </style>
+    <!-- loop -->
+    <path d="M 360 44 C 250 44 232 150 300 196 M 360 44 C 470 44 488 150 420 196" fill="none" stroke="#1d1d1b" stroke-width="3"/>
+    <!-- unit -->
+    <rect x="296" y="192" width="128" height="64" rx="10" fill="#e8f0ea" stroke="#1f5f3f" stroke-width="2.5"/>
+    <text x="360" y="220" text-anchor="middle" class="t3 h3s" style="fill:#1f5f3f;">NeckLoop unit</text>
+    <text x="360" y="240" text-anchor="middle" class="t3 b3">70 x 39 x 18 mm</text>
+    <!-- port marks -->
+    <line x1="322" y1="256" x2="322" y2="268" stroke="#52514e" stroke-width="3"/>
+    <line x1="398" y1="256" x2="398" y2="268" stroke="#52514e" stroke-width="3"/>
+    <!-- labels left -->
+    <text x="20" y="40" class="t3 h3s">Inductive loop</text>
+    <text x="20" y="58" class="t3 b3">750 mm standard, 550 mm short;</text>
+    <text x="20" y="74" class="t3 b3">sound reaches any device in its</text>
+    <text x="20" y="90" class="t3 b3">T-coil program</text>
+    <line x1="192" y1="66" x2="266" y2="80" stroke="#d9d6cd" stroke-width="1.5"/>
+    <text x="20" y="150" class="t3 h3s">Weight</text>
+    <text x="20" y="168" class="t3 b3">34 g unit; 52 g with the</text>
+    <text x="20" y="184" class="t3 b3">standard loop</text>
+    <line x1="150" y1="172" x2="292" y2="210" stroke="#d9d6cd" stroke-width="1.5"/>
+    <text x="20" y="258" class="t3 h3s">USB-C charging</text>
+    <text x="20" y="276" class="t3 b3">250 mAh fixed battery; 80 percent</text>
+    <text x="20" y="292" class="t3 b3">in 1 h, full in under 3 h; runs</text>
+    <text x="20" y="308" class="t3 b3">more than 10 hours per charge</text>
+    <line x1="200" y1="286" x2="318" y2="264" stroke="#d9d6cd" stroke-width="1.5"/>
+    <!-- labels right -->
+    <text x="500" y="40" class="t3 h3s">Into the T-coil</text>
+    <text x="500" y="58" class="t3 b3">transmission delay under 20 ms;</text>
+    <text x="500" y="74" class="t3 b3">adaptive gain up to 20 dB as</text>
+    <text x="500" y="90" class="t3 b3">noise rises</text>
+    <line x1="496" y1="66" x2="452" y2="84" stroke="#d9d6cd" stroke-width="1.5"/>
+    <text x="500" y="150" class="t3 h3s">Connect once</text>
+    <text x="500" y="168" class="t3 b3">hold within 10 cm of the mic,</text>
+    <text x="500" y="184" class="t3 b3">press Connect on the mic;</text>
+    <text x="500" y="200" class="t3 b3">the link is remembered</text>
+    <line x1="496" y1="176" x2="428" y2="208" stroke="#d9d6cd" stroke-width="1.5"/>
+    <text x="500" y="258" class="t3 h3s">Headphone output</text>
+    <text x="500" y="276" class="t3 b3">3.5 mm jack; volume limiter set</text>
+    <text x="500" y="292" class="t3 b3">by pin tool within 30 seconds</text>
+    <text x="500" y="308" class="t3 b3">of startup</text>
+    <line x1="496" y1="286" x2="402" y2="264" stroke="#d9d6cd" stroke-width="1.5"/>
+  </svg>
+  </div>
+  <figcaption><b>Figure 3: the NeckLoop by the numbers.</b> Figures from Phonak's combined NeckLoop (02) and (03) datasheet and user guide, read in full from the operator's document archive; the connect procedure and limiter note follow Phonak's guide wording as carried in the operator-reviewed catalogue behind this guide. The two versions share every figure shown here - the documented differences are the (02)-only Check readout and Pass-around compatibility.</figcaption>
+</figure>
+
+<h3>Roger X - the plug-in, in two options</h3>
+
+<p>The Roger X is a 9 x 9 x 9.65 mm cube weighing under a gram, ending in the industry-standard three-pin Europlug. It has no battery: it draws from the hearing aid it is fitted to - 2.7 mA active, 0.5 mA asleep - which is why Phonak's guidance, carried in the catalogue behind this guide, is to remove it when Roger is not in use. Pairing runs from the microphone, since the receiver has no controls: hold the transmitter within 10 cm, press Connect once, and the link is remembered.</p>
+
+<p>The (02) and (03) options are where buyers get turned around; the honest summary is that (02) is the fuller unit. Phonak's 2023-edition table lists Option (02) with all Roger microphones, and Option (03) against a named set - the iN generation plus the Roger Select, Roger On, Roger Table Mic II and Roger Clip-On Mic. Three features belong to (02) only: EasyGain output-gain adjustment, the Check function and link quality measurement; adaptive gain and stand-by are shared, and the table footnotes that Option (03) is not available in certain countries. Never read (03) as the newer tier - it is the reduced-feature option - and the table predates the current Roger 3 microphones, so it does not settle how (03) behaves with them; the retail listing behind this guide keeps that caveat deliberately, and so do we.</p>
+
+<h3>Design-integrated receivers - shaped for one device</h3>
+
+<p>Design-integrated receivers are the opposite philosophy: hardware shaped for exactly one device, snapped onto its base, chosen by a model-specific receiver number. The current set is four units - Roger 14, Roger 17, Roger 20 and Roger 21 - all serving implant processors, with two child-proofing details: a tamperproof lock for babies and toddlers up to 36 months integrated in the Roger 20 and 21, and a protection sleeve available for the Roger 14. Earlier Phonak aids had their own members: the 2023-edition tables map Belong-era Audeo B, Bolero B, Sky B, Naida B and Vitus models to a Roger 18 or Roger 19, an AS18 or AS19 audio shoe taking a Roger X, or the NeckLoop. The buying rule is absolute: confirm the receiver number against your exact device first - a receiver shaped for the wrong processor is not adaptable.</p>
+
+<h2 id="implants">Cochlear implants: reading your row</h2>
+
+<p>Advanced Bionics - Phonak's Sonova sister company - gets the fullest rows in the receiver tables. The current Naida CI M (adult) and Sky CI M (paediatric) take RogerDirect, with the NeckLoop as the worn alternative. Each older processor carries a documented route with a condition attached, and the conditions are the point. The Naida CI Q series takes a design-integrated Roger 17, the NeckLoop, or a Roger X - which on the Q series, per the table's own footnote, must be used with a ComPilot. Harmony and Auria take a Roger X on the iConnect adapter, or the NeckLoop. Neptune is the exception every summary should name: no NeckLoop route at all - the table documents one path only, a Roger X with the Neptune Connect, with a recommended CI profile setting alongside.</p>
+
+<p>Phonak's bimodal Naida Link and Sky Link aids have a table of their own: the Naida Link M and Sky Link M take RogerDirect, a Roger X or the NeckLoop; the Naida Link RIC a Roger X on the AS15 audio shoe, or the NeckLoop; the Naida Link UP a Roger X on the AS10, or the NeckLoop. Bimodal use as a whole is routed device by device rather than as one configuration - have your audiology team confirm your combination.</p>
+
+<p>The other makers follow row by row, usually through a named adapter. Cochlear's Nucleus 7 and 8: a design-integrated Roger 20, a Roger X on the Mini Microphone 2+, or the NeckLoop; Nucleus 5 and 6: a Roger 14, a Roger X on the Euro accessory adapter - with a recommended CI setting footnoted - or the NeckLoop; Kanso, Baha and Osia 2 have rows of their own, and even the older Freedom keeps a NeckLoop route. MED-EL's SONNET: a design-integrated Roger 21, or a Roger X on the FM battery pack cover; RONDO, ADHEAR and SAMBA each name their interface. Oticon Medical's Neuro and most Ponto models route through a Roger X on the maker's streamer or EduMic - the oldest Ponto Pro models keep only the NeckLoop route. Read your own row - the neighbouring model's route is not yours. Processors in no row, such as the older Advanced Bionics Chorus, have no documented route in the editions we read.</p>
+
+<h2 id="second-hand">Buying second-hand: the honest position</h2>
+
+<p>Used Roger equipment sells at a healthy discount, and the hesitation is rational: the licence system genuinely can leave a used Roger X worthless for the buyer's purpose. But the risk is not uniform. A used NeckLoop carries no licence pool - nothing can arrive empty; the questions are ordinary used-electronics ones, starting with battery health, since the cell is not removable. A used design-integrated receiver carries no licence either; its risk is model mismatch. The Roger X concentrates all the licence risk in one tiny cube.</p>
+
+<p>No Phonak document we could reach gives a consumer a way to check a used Roger X's licence state before buying - the full-or-empty check runs through the Roger Installer, professional equipment. So the protections are procedural. Ask the seller whether a hearing care professional has checked the unit, with the result in writing. Prefer sellers who accept returns. If a RogerDirect install is the goal, check the serial boundary above first. And weigh the alternative that dissolves the question: a Roger 3 microphone carries its own unlimited receivers, so no licence arithmetic applies on RogerDirect platforms. On cover, the catalogue records behind this guide note Phonak's warranty on Roger devices as one year as standard and two years for serialised Roger devices - worth putting to any seller.</p>
+
+<h2 id="not-for">Who should not buy a receiver</h2>
+
+<p>The clearest group is the one honest sales listings route away: on a RogerDirect platform - Phonak Marvel, Paradise, Lumity or Infinio, the latest Unitron models, or a current AB M-series processor - you usually should not buy any receiver on this page. A Roger 3 microphone installs its own; a Roger X bought just in case for a Lumity aid solves a problem you do not have.</p>
+
+<p>The second group has no Roger path at all: no RogerDirect, no T-coil, no direct audio input, no compatible streamer - confirm with an audiologist before spending anything. Two adjacent needs are served elsewhere: a television-only problem belongs to the dedicated <a href="../phonak-tv-connector/">Phonak TV Connector</a>, and the choice between the microphones themselves is drawn in our <a href="../phonak-roger-select-3/">Roger Select 3</a> and <a href="../phonak-roger-on-3/">Roger On 3</a> guides.</p>
+
+<h2 id="faq">Questions worth asking before you buy</h2>
+
+<dl class="faq">
+  <dt>My aids are Phonak Marvel, Paradise, Lumity or Infinio - do I need to buy a receiver?</dt>
+  <dd><p>Usually not - a saving, not a catch: those platforms carry RogerDirect, so a current Roger 3 microphone installs its own receivers, with nothing extra to buy or wear. The same applies to the latest Unitron aids and the Advanced Bionics Naida CI M and Sky CI M processors. Narrow exceptions: a handful of Phonak Virto custom models sit outside RogerDirect and use the T-coil route, and older microphones without spare built-in licences need a licence moved in professionally via a Roger X.</p></dd>
+
+  <dt>What is the difference between Roger X (02) and Roger X (03)?</dt>
+  <dd><p>Two options of one receiver, separated by Phonak's 2023-edition table rather than by age: Option (02) is listed with all Roger microphones and carries EasyGain, the Check function and link quality measurement; Option (03) lacks those three, is listed against a named microphone set, and is not available in certain countries. Pairing is identical for the two, and both share adaptive gain and stand-by. Do not read (03) as newer or better, and note the table predates the Roger 3 microphones - confirm your exact pairing before relying on it.</p></dd>
+
+  <dt>Can I check whether a used Roger X still holds its licence before I buy?</dt>
+  <dd><p>Not by yourself - and we would rather say so plainly than imply a trick exists. No Phonak document we could reach publishes a consumer route to read a Roger X's licence state: the full-or-empty check runs through the Roger Installer, which Phonak lists for hearing care professionals, school audiologists and school personnel. The workable protections: ask the seller for a professional check with the result in writing, and buy where returns are accepted, so an empty unit costs postage rather than the price.</p></dd>
+
+  <dt>Will the NeckLoop work with hearing aids that are not Phonak?</dt>
+  <dd><p>Yes - that is the point of it. The NeckLoop delivers Roger through the T-coil, a cross-industry standard, so hearing aids and implant processors from any manufacturer can use it, provided a T-coil program is fitted and enabled - and Phonak's guide notes the program is often not enabled by default, so one professional visit may come first. A use most buyers miss: Phonak documents the NeckLoop as a USB audio interface too, feeding third-party speech-to-text apps on a computer or phone.</p></dd>
+
+  <dt>I have an Advanced Bionics cochlear implant - does this work with my sound processor?</dt>
+  <dd><p>Yes - every AB processor in Phonak's current tables has a documented receiver route. The Naida CI M and Sky CI M take RogerDirect, or the NeckLoop. The Naida CI Q series takes a design-integrated Roger 17, the NeckLoop, or a Roger X used with a ComPilot, per the table's condition. Harmony and Auria take a Roger X on the iConnect adapter, or the NeckLoop. Neptune has no NeckLoop route - its path is a Roger X with the Neptune Connect. For bimodal fittings the published material treats each side separately: confirm the combination with your audiology team.</p></dd>
+
+  <dt>What about older Phonak models?</dt>
+  <dd><p>They are the reason the 2023-edition tables stay useful: Belong-era aids are mapped model by model to a design-integrated Roger 18 or Roger 19, to an AS18 or AS19 audio shoe taking a Roger X, or to the NeckLoop - with a condition easy to miss: on many of the small receiver-in-canal models, a Roger X must be used with a ComPilot II. The route is model-specific, so have the receiver number confirmed for your exact model before money moves.</p></dd>
+</dl>
+
+<h2 id="sources">Sources and independence</h2>
+
+<div class="sources">
+<p>Every product fact in this guide rests on a manufacturer-primary document, or on evidence-tiered research verified against one: Phonak's Rogerpedia professional reference in two byte-verified editions - V8.00 of June 2023, international (the earlier-Phonak design-integrated tables, the Option (02) and (03) feature table, the serial-number sentence) and V9.00 of September 2024, Australian (the current receiver set, the RogerDirect platform lists, the cochlear implant and Link tables); Phonak's technical datasheet for the Roger X (02) and its datasheet, user guide, quick guide and speech-to-text installation guide for the Roger NeckLoop (02) and (03), read in full from the operator's document archive; Phonak knowledge-base wording on the Roger Installer and licence transfer, byte-verified in the catalogue research behind this guide; and the operator-reviewed retail listings for these receivers. Where the record runs out, this guide says so: no reachable Phonak document publishes a consumer route to read a Roger X's licence state; the serial-number sentence is not restated in the 2024 edition; no (03)-specific Roger X datasheet was found; and no verified UK retail price was available at the time of writing, so this guide carries none.</p>
+</div>
+
+<footer class="independence">
+  <p>This is an independent editorial guide. It is not affiliated with, endorsed by, or sponsored by Sonova AG or any of its brands. Phonak, Roger, RogerDirect, Audeo and Naida are trademarks of Sonova AG; Advanced Bionics, Unitron and Hansaton are Sonova group companies. Cochlear, Nucleus, Kanso, Baha, Osia, MED-EL, SONNET, RONDO, ADHEAR, SAMBA, Oticon, ReSound, Starkey and all other product names are trademarks of their respective owners. Product capabilities change between firmware and platform generations - for a purchase decision, confirm compatibility for your exact devices with a hearing care professional.</p>
+  <p>Published 5 August 2026.</p>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "My aids are Phonak Marvel, Paradise, Lumity or Infinio - do I need to buy a receiver?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Usually not: those platforms carry RogerDirect, so a current Roger 3 microphone installs its own receivers with nothing extra to buy or wear - the same applies to the latest Unitron aids and the Advanced Bionics Naida CI M and Sky CI M processors. Narrow exceptions: a handful of Phonak Virto custom models sit outside RogerDirect and use the T-coil route, and older microphones without spare licences need a licence moved in professionally via a Roger X." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between Roger X (02) and Roger X (03)?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Two options of one receiver, separated by Phonak's 2023-edition table rather than by age: Option (02) is listed with all Roger microphones and carries EasyGain, the Check function and link quality measurement; Option (03) lacks those three, is listed against a named microphone set, and is not available in certain countries. Pairing is identical for the two options, and both share adaptive gain and stand-by. Do not read (03) as newer or better, and note the table predates the Roger 3 microphones, so confirm your exact pairing first." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I check whether a used Roger X still holds its licence before I buy?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Not by yourself: no Phonak document we could reach publishes a consumer route to read a Roger X's licence state. The full-or-empty check runs through the Roger Installer, which Phonak lists for hearing care professionals, school audiologists and school personnel. Practical protections: ask the seller for a professional check with the result in writing, and buy where returns are accepted, so an empty unit costs postage rather than the price." }
+    },
+    {
+      "@type": "Question",
+      "name": "Will the NeckLoop work with hearing aids that are not Phonak?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes - the NeckLoop delivers Roger through the T-coil, a cross-industry standard, so any manufacturer's hearing aids or implant processors can use it, provided a T-coil program is fitted and enabled. Phonak's guide notes the program is often not enabled by default, so one professional visit may come first. Phonak also documents the NeckLoop as a USB audio interface feeding third-party speech-to-text apps." }
+    },
+    {
+      "@type": "Question",
+      "name": "I have an Advanced Bionics cochlear implant - does this work with my sound processor?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes - every AB processor in Phonak's current tables has a documented route. The Naida CI M and Sky CI M take RogerDirect, or the NeckLoop. The Naida CI Q series takes a design-integrated Roger 17, the NeckLoop, or a Roger X used with a ComPilot per the table's condition. Harmony and Auria take a Roger X on the iConnect adapter, or the NeckLoop. Neptune has no NeckLoop route - its path is a Roger X with the Neptune Connect. For bimodal fittings the published material treats each side separately, so confirm the combination with your audiology team." }
+    },
+    {
+      "@type": "Question",
+      "name": "What about older Phonak models?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The 2023-edition tables map Belong-era aids model by model to a design-integrated Roger 18 or Roger 19, to an AS18 or AS19 audio shoe taking a Roger X, or to the NeckLoop; on many small receiver-in-canal models a Roger X must be used with a ComPilot II. The route is model-specific, so have the receiver number confirmed for your exact model before buying." }
+    }
+  ]
+}
+</script>
+
+</main>
+</body>
+</html>

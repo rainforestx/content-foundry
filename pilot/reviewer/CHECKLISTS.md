@@ -203,7 +203,11 @@ shingle censuses: the scope-box and footer boilerplate, the
 price-disclosure sentence ("No verified UK retail price was available at
 the time of writing, so this guide carries none"), and the CONV-worded
 CI FAQ question ("I have an Advanced Bionics cochlear implant - does
-this work with my sound processor?"). Everything else is body prose and
+this work with my sound processor?"). Also furniture, flowing from the same
+ruling's strict-lede-naming wave: the standfirst clause "Advanced
+Bionics processors among them" (and its sound-processors variant),
+identical across articles because ruling 3 applied it as one wave.
+Everything else is body prose and
 must be fresh per article. Additions to this list need operator
 ratification. Same ruling: standfirsts name Advanced Bionics explicitly
 (strict lede naming per CONV section 5).
