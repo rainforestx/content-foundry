@@ -62,6 +62,16 @@ shared verbatim across articles by design and excluded from prose-lift
 censuses; (2) strict lede naming applies - standfirsts name Advanced
 Bionics explicitly, applied to all three articles in one wave.
 
+### Ruling 4 - 2026-08-06, article 4 (Roger receivers), in session
+
+Verbatim: "accept"
+
+Reading: fourth consecutive acceptance, including the first system-
+explainer-type article and its over-band word count (reported as a
+finding, accepted as shipped) - evidence the type split is real and the
+band needs the type amendment when article 5 confirms it. Oracle record
+stands at 4/4 acceptances with zero factual overrules.
+
 ## Segment-adaptive plan (agreed direction, not yet in force)
 
 Once AUDIENCE.md is signed: each article's brief names a primary reader
