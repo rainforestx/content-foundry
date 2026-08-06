@@ -66,7 +66,7 @@ CONFIRMED-substrate appears in the article in confident unhedged form.
 | # | Where | Claim | Source | Tier |
 |---|-------|-------|--------|------|
 | 1 | Standfirst | A clogged wax filter is the first thing to suspect when an aid goes quiet (troubleshooting-table position, not a frequency claim); the same name is stamped on different products; colour varies; the aid's name does not identify the filter | Rows 5-6, 33-35, 12-13 below (restated) | Derived (restatement) |
-| 2 | Standfirst | NHS wearers' filters are "probably free" | Row 41 below; AUD S4 brief (binding: say so honestly) | CONFIRMED-substrate + AUD (hedged "probably") |
+| 2 | Standfirst | NHS-supplied wearers should ask their department before paying (routing, no free assertion) | Row 41 below; AUD S4 brief; operator factual challenge 2026-08-06 | Routing only (corrected from "probably free") |
 | 3 | Scope box | Wax filter = wax guard = cerumen filter, terminology varies by maker; brand families listed are those the guide covers | Substrate census (WAX-GUARDS-INDEX sec 2: manufacturer product names span "wax guards", "waxguard", "filters", "cerumen") | CONFIRMED-substrate |
 | 4 | In brief | All six bullets restate rows below (5, 8-10, 12-14, 33-35, 24-26, 37-41); the sibling drift rule applies: any edit to a restated fact updates its in-brief twin in the same commit | as cited | Derived (restatement) |
 
@@ -143,7 +143,7 @@ section.
 | 38 | Cost P2 | Observation: assistive-listening specialist - CeruStop pack 9.46 GBP inc VAT | A2-OBS (Connevans, SERP synthesis tier, 2026-08-06) | A2-OBS |
 | 39 | Cost P2 | Observation: clinic-attached shops - ProWax miniFit 12.95 GBP; NanoCare 3.0 12.95 GBP | A2-OBS (The Hearing Centre Shop, SERP synthesis, 2026-08-06) | A2-OBS |
 | 40 | Cost P2 | The cross-class spread (3.95-6.95 online specialist vs 12.95 clinic shop, same families) is presented as a range with both retailer classes identified, "up to roughly a three-fold difference" anchored explicitly to the NanoCare 3.0 pair (12.95 vs 3.95, 3.3x; the ProWax miniFit pair is 1.9x, inside "up to"); no single canonical cost is printed | A2 rule 3 compliance framing over rows 37 and 39 | A2 (spread framing) |
-| 41 | Cost P3, FAQ 6, Standfirst | NHS audiology departments typically supply replacement filters free (with batteries and tubing) to NHS hearing aid users; ask the department first; includes Danalogic wearers | AUD (SIGNED, binding S4 brief: state the free route first, honestly); RESEARCH sec 5 NHS context (RNID + NHS trust pages, snippet tier); "typically" hedge carried throughout | AUD-binding + snippet corroboration (hedged) |
+| 41 | Cost P3, FAQ 6, Standfirst, Not-for | NHS: batteries and repairs free NHS-wide; trusts run consumables services (tubing, domes, cleaning rods); FILTER-SPECIFIC free supply is UNVERIFIED and trust-variable - article routes to ask-your-department, asserts nothing; most NHS fittings are BTE (thin tube/mould, no retail filter), so the filter-relevant NHS group is the receiver-in-ear minority (e.g. Danalogic Ambio Smart RIE) | Operator factual challenge 2026-08-06 (practising audiologist, in session) + live search same day: Royal Berkshire/Newcastle/Somerset/Royal Free trust pages (batteries+repairs+consumables confirmed, filters never named); danalogic.co.uk range (BTE-dominant, one RIE); NHS-parts retail shops exist (soundhearing.org) | CONFIRMED (batteries/repairs) + VERIFIED-GAP (filters) + operator ruling (device mix) |
 | 42 | Cost P3 | "A guide connected to a retailer loses a sale by saying so; it is still the right first stop" - independence/honesty statement | AUD register (independence tied to concrete facts); property voice | Register |
 
 ## Who should not buy, FAQ residue
@@ -300,7 +300,7 @@ asserts the two-pin principle only.
     in safe-direction/absence form (rows 21, 25). PASS.
 11. Hedge stripped or detached: the strength-split hedge keeps its
     target (convergent inference, dome-worn scope) and context (custom
-    mould check-line) - row 45; the NHS "typically" hedge carried
+    mould check-line) - row 45; the NHS claim corrected to routing-only
     everywhere it appears (row 41); "probably free" in the standfirst.
     PASS.
 12. Quoted text altered: all five verbatim quotes (rows 7, 23, 27, 28,
@@ -354,3 +354,21 @@ asserts the two-pin principle only.
   commit.
 - The source repo was touched read-only; git -C /home/user/earx-catalogue
   status --porcelain verified empty at handoff.
+
+## Correction record - 2026-08-06, operator factual challenge (trial cycle 1)
+
+The operator challenged the NHS claims pre-acceptance: most RIC aids are
+not NHS-provided, and free filter supply was not certain. Live search
+confirmed both: trust pages verify free batteries/repairs and generic
+consumables services but never name wax filters; the Danalogic NHS range
+is BTE-dominant with a single RIE model. All four NHS surfaces (standfirst,
+In brief, Cost P3, Not-for, FAQ 6 + JSON-LD twin) were corrected from
+free-assertion to ask-your-department routing, and the BTE/RIE scope
+nuance was added to Cost P3. This is the trial's first factual overrule;
+TRIAL.md pause invoked. The pipeline defect: a snippet-tier claim
+("typically free") survived to shipped prose on the strength of an
+audience-brief instruction plus a hedge, without a dedicated
+claim-then-counter-claim search. Harvest: consumer-price/entitlement
+claims about third-party institutions (NHS, insurers) need the same
+wall as product claims - assert only what a named source states, or
+route the reader to the institution.

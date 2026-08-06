@@ -38,3 +38,25 @@ per cycle, operator minutes consumed) posted to the bus; the operator
 decides whether a standing cadence is earned, at what rate, or whether
 the pipeline returns to operator-triggered. A factual overrule by the
 operator during the trial pauses it immediately for review.
+
+## PAUSED - 2026-08-06, first factual overrule (cycle 1, pre-acceptance)
+
+The operator challenged the cycle 1 article's NHS claims ("the majority
+of ric hearing aids aren't provided on nhs and I'm not sure if they are
+free. did you verify via search or other method?"). Honest answer: no
+dedicated verification search had run - the claim rested on snippet-tier
+grounding plus the audience brief's free-route instruction, shipped
+behind hedges. Live search then substantiated the challenge on both
+axes: no reachable NHS source names wax filters as free (batteries and
+repairs are; filter policy is trust-variable), and the NHS device mix is
+BTE-dominant so most NHS fittings take no retail filter at all. All four
+NHS surfaces corrected to ask-your-department routing (the CLAIMS.md
+correction record has the full account and the harvested wall:
+institutional-entitlement claims need the same discipline as product
+claims - assert only what a named source states, or route the reader).
+
+Trial state: cycle 1 correction delivered for the operator's rendered
+review; CYCLE 2 DOES NOT LAUNCH until the operator has reviewed this
+overrule and explicitly resumes or ends the trial. The oracle record now
+carries its first factual overrule; the zero-overrules streak claim is
+retired everywhere it appears.

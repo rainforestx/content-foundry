@@ -153,9 +153,16 @@ named per A2; all figures inc VAT as displayed unless stated; re-verify at revis
   pack (3.95-6.95 online specialist vs 12.95 clinic shop) is the audience's
   price-resentment hook; state it as a spread with both classes named, never as a
   single "price of" figure (A2 rule 3 bars shipping conflicting figures as one).
-- NHS context (snippet tier, RNID + NHS trust pages): NHS audiology departments
-  supply replacement batteries, tubing and filters free of charge to NHS hearing
-  aid users. Danalogic is the NHS brand and its filter is the ReSound part.
+- NHS context, CORRECTED 2026-08-06 after operator factual challenge + live
+  search: NHS-wide free supply is verified for batteries and repairs; trusts
+  run consumables services naming tubing, domes and cleaning rods (Royal
+  Berkshire, Newcastle, Somerset, Royal Free pages); NO reachable source names
+  wax filters as free - filter policy is trust-variable and UNVERIFIED, and
+  retail shops selling NHS-range spares exist (soundhearing.org). Device mix:
+  the Danalogic NHS range is BTE-dominant (67/77/88/98) with one RIE model
+  (Ambio Smart 62); most NHS fittings wear thin tubes or moulds that take no
+  retail filter (operator, practising audiologist, in session). Danalogic is
+  the NHS brand and its filter, where an RIE is fitted, is the GN/ReSound part.
 - Carried practice (Roger research): most UK buyers with hearing loss qualify for
   VAT relief; quote inc and ex VAT where pricing appears.
 
