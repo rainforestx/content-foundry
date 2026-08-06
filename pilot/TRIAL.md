@@ -103,3 +103,21 @@ after re-verifying A2 price dates and any time-sensitive claims).
 The publication/platform decision, when taken, is the natural resume
 trigger - articles gain a live surface and the measurement layer
 starts feeding the loop.
+
+## STATUS 2026-08-06 - operator ruling, article-pipeline-resume
+
+Verbatim: "the article pipeline stays PARKED at the cycle-2 checkpoint.
+Cycle 2 production does not launch. Record as a dated status section in
+content-foundry/pilot/TRIAL.md."
+
+Ruled through the operator console's decision card and pasted into
+session. The park recorded earlier the same day is now the operator's
+own standing decision rather than the session's reading of a
+redirection. Cycle 2's grounding stays banked (commit 7b9fdd2);
+production is not scheduled, not queued, and does not launch on any
+trigger. Cycle 1's rendered acceptance remains open and is not a
+precondition for anything.
+
+Resuming requires the operator's word. The publication-platform decision
+remains the natural resume trigger and is itself deferred, so nothing
+about this park is waiting on the session.

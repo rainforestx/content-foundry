@@ -87,6 +87,21 @@ byline with stated stake) but BLOCKED on input only the operator holds:
 the name and stake text to print. No byline ships until that text
 arrives; the property voice carries until then.
 
+### Ruling 6 - 2026-08-06, byline identity, via the operator console
+
+Verbatim: "the operator will supply the byline name and stake line in
+session. Record the exact text in content-foundry/pilot/anchor-spec/
+VOICE.md; no byline ships until it lands."
+
+Reading: ruling 5's byline agreement in principle is confirmed and its
+mechanism is now fixed. The operator supplies the exact name and stake
+line; that text is recorded verbatim in this file and nowhere else; the
+articles carry the property voice until it lands. As of this entry the
+text has NOT been supplied, so no byline ships. When it arrives it is
+appended here as its own dated block and propagated to every article in
+one wave, per the surface-consolidation rule: this file is the home of
+the text, the articles are copies of it.
+
 ## Segment-adaptive plan (agreed direction, not yet in force)
 
 Once AUDIENCE.md is signed: each article's brief names a primary reader

@@ -42,3 +42,18 @@ Generation-stable accessory imagery (NeckLoop 042-4001, TV Connector,
 PartnerMic packshots) is held and usable once its product identity is
 source-confirmed for the article that wants it; each use still gets an
 IMAGES row per Amendment A1.
+
+## Ruling 2026-08-06 - operator, via the operator console
+
+Verbatim: "the operator will drop the pinned documents into the Drive
+archive. Items leave content-foundry/pilot/ACQUISITIONS.md as their
+bytes are verified at point of use."
+
+Two consequences worth stating because they are easy to get wrong. A
+document arriving in Drive does not by itself clear its row here: the
+row clears when an article actually reads the bytes and verifies the
+document's identity by imprint, at the point of use, because a filename
+has misidentified a document four separate times in this pilot. And a
+row that has been queued for a long time is not evidence of neglect -
+the queue is the operator's to service on their own cadence, and the
+articles hedge or state absences in the meantime rather than waiting.
