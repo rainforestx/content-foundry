@@ -312,3 +312,35 @@ price scope; everything else in item 17 stands.
 4. The worth-it verdict remains scoped prose ("for some people"), never
    universal, per the audience register rules.
 
+
+## Amendment A3 - region scoping (PROPOSED, awaiting operator signature)
+
+Basis: operator question in session, 2026-08-06: "unless regionally
+specific shouldn't articles be written for a global audience?" - raised
+immediately after the NHS overrule showed regional framing carrying
+factual risk. Proposed rule set:
+
+1. Articles are written for a global English-reading audience by
+   default. The core of every article - mechanisms, product families,
+   identification methods, compatibility doctrine - is region-neutral,
+   and a sentence in the core makes no claim that is only true in one
+   region.
+2. Any regional fact is explicitly scoped to its named region in the
+   sentence that states it ("in the UK", "NHS audiology departments" -
+   institution AND region named, per the wall harvested from the NHS
+   overrule). Silent regional assumption is a review finding.
+3. Pricing and entitlement content lives in region-scoped blocks. A2's
+   UK price observations are the first instance of this pattern; a
+   second region's block, when one is ever added, carries its own dated
+   observations under the same A2 discipline.
+4. The UK remains the sole instantiated region until reader signals
+   exist: the property's commercial tie-in is UK, the A2 evidence base
+   is UK, and the operator's professional authority is UK practice.
+   Additional regions are added by evidence of demand (the measurement
+   layer), not speculation.
+5. Regionally-specific article types remain legitimate where the region
+   IS the subject (the cycle 2 NHS-names reference is the standing
+   example) - such articles declare their region in the scope box, as
+   the current corpus already does.
+6. British English remains the property voice; changing it is a
+   separate amendment.
