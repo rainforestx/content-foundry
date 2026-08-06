@@ -313,12 +313,15 @@ price scope; everything else in item 17 stands.
    universal, per the audience register rules.
 
 
-## Amendment A3 - region scoping (PROPOSED, awaiting operator signature)
+## Amendment A3 - region scoping (SIGNED)
 
 Basis: operator question in session, 2026-08-06: "unless regionally
 specific shouldn't articles be written for a global audience?" - raised
 immediately after the NHS overrule showed regional framing carrying
-factual risk. Proposed rule set:
+factual risk. Drafted as proposed the same day; the session's stated
+plan (sign, then run the region-scoping audit wave and add the reviewer
+check) was approved by the operator's "continue" in the same session,
+2026-08-06. Rule set:
 
 1. Articles are written for a global English-reading audience by
    default. The core of every article - mechanisms, product families,

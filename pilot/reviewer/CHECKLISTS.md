@@ -224,3 +224,18 @@ declared blind spots. A reviewer does NOT re-run what the gates cover
 mechanically - but the gates' blind spots (meaning-level contradiction,
 claims tables that misdescribe the article) remain review work, and every
 gate check was sabotage-proven able to fire before its clean runs counted.
+
+## Named checks added 2026-08-06 (post-NHS-overrule, Amendment A3)
+
+- INSTITUTIONAL-ENTITLEMENT WALL (harvested from the trial's first
+  factual overrule): any claim about a third-party institution's
+  entitlements or provision (NHS, insurers, public programmes) is held
+  to the product-claim standard - assert only what a named source
+  states, or route the reader to the institution. Hedges ("typically",
+  "probably") do not substitute for a source. Run BY NAME.
+- REGION SCOPING (Amendment A3): the article core makes no claim that is
+  only true in one region; every regional fact names its region in the
+  sentence that states it, institution AND region together; pricing and
+  entitlement content sits in region-scoped blocks; region-as-subject
+  articles declare their region in the scope box. Silent regional
+  assumption is a finding. Run BY NAME.

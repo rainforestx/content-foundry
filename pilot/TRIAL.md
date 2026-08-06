@@ -60,3 +60,19 @@ review; CYCLE 2 DOES NOT LAUNCH until the operator has reviewed this
 overrule and explicitly resumes or ends the trial. The oracle record now
 carries its first factual overrule; the zero-overrules streak claim is
 retired everywhere it appears.
+
+## RESUMED - 2026-08-06, operator's word: "continue"
+
+The pause's purpose was served: the overrule was investigated, the
+claims corrected across all surfaces, the wall harvested into the
+reviewer battery BY NAME (institutional-entitlement + A3 region
+scoping), and the corrected renders delivered. The operator engaged
+with the correction across two further turns (raising and approving
+Amendment A3) and then said "continue" against the session's stated
+plan. Cycle 2 (NHS hearing aid names translated - region-as-subject
+under A3 rule 5) launches now with the audience-projection section
+formalized in grounding. Cycle 1's rendered acceptance remains OPEN;
+the oracle report will record cycle 1 as corrected-pending-acceptance
+unless the operator accepts before cycle 2 delivers. Oracle record to
+date: 4/4 pre-trial acceptances; trial cycle 1 = one factual overrule
+(operator-caught, search-substantiated, corrected same day).
