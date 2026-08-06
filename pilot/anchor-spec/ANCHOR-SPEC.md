@@ -290,3 +290,25 @@ pilot/ACQUISITIONS.md.
 6. Diagrams are not replaced: photographs show what a thing looks like;
    the drawn figures carry mechanism. Both justify their place
    independently.
+
+## Amendment A2 - pricing (SIGNED)
+
+Basis: the operator agreed the session's stated position in session,
+2026-08-06 ("i agree with your recommendations"; the position, presented
+on both consensus surfaces: allow dated indicative price observations as
+a defined source class). This amendment narrows never-list item 17's
+price scope; everything else in item 17 stands.
+
+1. Articles may carry UK price observations under these conditions, all
+   of them: the figure is labelled indicative; it carries its as-of date
+   in the visible text; the retailer class is named without turning the
+   mention into an endorsement; and the claims table records the
+   observation source and date like any claim.
+2. Price observations are re-verified at every article revision that
+   touches their section; a stale date is a defect the reviewer flags.
+3. Where observations conflict beyond normal spread (the recorded
+   receiver case: 60 vs 155 GBP), no figure ships - the conflict is
+   stated or the topic omitted.
+4. The worth-it verdict remains scoped prose ("for some people"), never
+   universal, per the audience register rules.
+

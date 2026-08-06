@@ -1,12 +1,12 @@
 # BRAND TOKENS - the publisher design system
 
-STATUS: PROPOSED, unsigned. This file freezes the de facto design system
-the first three articles already share into a named token set. On operator
-signature it becomes the interim publisher brand: the brand_tokens machine
-gate then enforces it on every article, and any change to it is a signed
-amendment here first, propagated to articles second. If a real brand
-identity exists or arrives later (palette, type, name treatment), it
-replaces this section by amendment and the gate follows automatically.
+STATUS: SIGNED - ratified as the interim publisher brand by the operator,
+2026-08-06 ("i agree with your recommendations", covering the stated
+position to ratify the interim tokens now). The brand_tokens machine gate
+enforces this set on every article; any change is a signed amendment here
+first, propagated to articles second. If a real brand identity arrives
+later (palette, type, name treatment), it replaces this set by amendment
+and the gate follows automatically.
 
 ## Colour tokens (complete census of the shipped corpus, 2026-08-05)
 

@@ -72,6 +72,21 @@ finding, accepted as shipped) - evidence the type split is real and the
 band needs the type amendment when article 5 confirms it. Oracle record
 stands at 4/4 acceptances with zero factual overrules.
 
+### Ruling 5 - 2026-08-06, consensus-surface batch, in session
+
+Verbatim: "i agree with your recommendations"
+
+Reading: the operator agreed the recommendation set presented on both
+consensus surfaces. Actioned per the stated positions: the pricing
+amendment A2 is signed (dated indicative observations become a defined
+source class); BRAND-TOKENS.md is ratified as the interim publisher
+brand; PR #11 merged and PR #13 merge queued; the two-cycle autonomy
+trial is authorized; the publication-platform options analysis is
+commissioned. The BYLINE ruling is agreed in principle (named operator
+byline with stated stake) but BLOCKED on input only the operator holds:
+the name and stake text to print. No byline ships until that text
+arrives; the property voice carries until then.
+
 ## Segment-adaptive plan (agreed direction, not yet in force)
 
 Once AUDIENCE.md is signed: each article's brief names a primary reader
