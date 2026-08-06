@@ -57,3 +57,30 @@ has misidentified a document four separate times in this pilot. And a
 row that has been queued for a long time is not evidence of neglect -
 the queue is the operator's to service on their own cadence, and the
 articles hedge or state absences in the meantime rather than waiting.
+
+## Ruling 2026-08-06 (second, supersedes the routing above) - operator
+
+Verbatim: "an egress-open session is authorised to fetch the pinned URLs,
+magic-byte verifying every PDF and recording edition and date. Operator
+diverged from the session position - allowed; recorded."
+
+The session's position had been that the operator drops documents into
+Drive and rows clear at point of use. The operator diverged and widened
+it: a session with working egress may fetch the pinned URLs directly.
+Both stand - the Drive route remains open, and this adds a second route
+that does not wait on the operator at all. The earlier entry is kept
+above rather than edited, per the append-only rule.
+
+Conditions carried by the ruling itself, and they are the whole point of
+it: every PDF is magic-byte verified, not trusted by extension or by
+content-type header, and the edition and date are recorded with it. That
+is the discipline the filename traps in this pilot earned - four
+documents so far have been something other than what their filename
+said. A fetched file that fails its magic-byte check is not a source; it
+is an incident, and it gets recorded as one.
+
+Standing note for whichever session has egress: this repository's own
+fetches have returned 403 on every manufacturer and retailer page tried
+to date, which is why the queue exists. An egress-open session should
+work the pinned list in one pass and record what still refuses, so the
+next session inherits a shorter list rather than repeating the wall.
