@@ -76,3 +76,30 @@ the oracle report will record cycle 1 as corrected-pending-acceptance
 unless the operator accepts before cycle 2 delivers. Oracle record to
 date: 4/4 pre-trial acceptances; trial cycle 1 = one factual overrule
 (operator-caught, search-substantiated, corrected same day).
+
+## PARKED - 2026-08-06, operator redirection to program goals
+
+Operator, in session: "are we done with article workflow or have we
+done enough to park it? we need to look at overall project goals."
+Ruling executed as: the pipeline parks at a clean checkpoint. Cycle 2
+grounding (in flight at the time) is allowed to finish and its
+artifacts are banked; cycle 2 PRODUCTION DOES NOT LAUNCH - the earlier
+auto-launch instruction is rescinded. The region-scoping audit wave
+completes and integrates (hygiene on shipped corpus). Cycle 1's
+rendered acceptance remains open for the operator whenever convenient.
+
+What the pipeline proved, for the program record: five articles
+through the full pipeline; four operator acceptances; one operator
+factual overrule caught pre-acceptance, search-substantiated,
+corrected same-day, harvested into two named reviewer checks; the
+trial exercised BOTH branches of its design (autonomous cycle end to
+end, and pause-on-overrule with review and resume); signed spec stack
+A1-A3 + AUDIENCE + BRAND-TOKENS + VOICE rulings 1-5; machine gates
+CI-enforced with sabotage tests.
+
+RESUME CONDITIONS: operator's word resumes cycle 2 at the grounded
+checkpoint (production launches against the banked index/research
+after re-verifying A2 price dates and any time-sensitive claims).
+The publication/platform decision, when taken, is the natural resume
+trigger - articles gain a live surface and the measurement layer
+starts feeding the loop.
