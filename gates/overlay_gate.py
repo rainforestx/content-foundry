@@ -44,7 +44,30 @@ import subprocess
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-REPO = os.path.dirname(HERE)
+
+
+def _repo_root(start):
+    """Walk up to the enclosing git repository.
+
+    Every copy of this file is byte-identical, so it cannot hardcode how deep
+    it sits. Byte-identity is what lets SOURCE_SHA detect drift between
+    installations rather than merely detecting a different install path.
+    """
+    d = start
+    while True:
+        if os.path.isdir(os.path.join(d, ".git")):
+            return d
+        parent = os.path.dirname(d)
+        if parent == d:
+            return start
+        d = parent
+
+
+REPO = _repo_root(HERE)
+# Stamped by --stamp from the canonical copy, and checked by --verify-source.
+# Computed over this file with the stamp line itself excluded, so stamping does
+# not invalidate the value it writes.
+SOURCE_SHA = "72d8a0a8c5f0f14ab5bdeca283b4113affea0db5485441544278f5354147cc5f"
 OVERLAY_DIR = os.path.join(".claude", "overlays")
 PROPOSED_DIR = os.path.join(OVERLAY_DIR, "_proposed")
 # An observation carries a date so it can age and be re-tested. A rule stated
@@ -253,10 +276,56 @@ def main(argv):
     if len(argv) > 1:
         if argv[1] == "--selftest":
             return selftest()
+        if argv[1] == "--verify-source":
+            stamped, actual = verify_source()
+            if stamped in (None, "unstamped"):
+                print("overlay_gate: unstamped copy (sha %s). Run --stamp on "
+                      "the canonical copy." % actual[:12])
+                return 0
+            if stamped != actual:
+                sys.stderr.write(
+                    "overlay_gate: SOURCE DRIFT. stamped %s, actual %s. This "
+                    "copy has been edited since installation, so the "
+                    "installations no longer enforce the same rules. Re-stamp "
+                    "at the canonical source and re-run --init, or port the "
+                    "edit deliberately.\n" % (stamped[:12], actual[:12]))
+                return 1
+            print("overlay_gate: source matches its stamp (%s)" % actual[:12])
+            return 0
+        if argv[1] == "--stamp":
+            path = os.path.abspath(__file__)
+            new = body_hash(path)
+            with open(path) as fh:
+                src = fh.read()
+            with open(path, "w") as fh:
+                fh.write(STAMP_RE.sub('SOURCE_SHA = "%s"' % new, src))
+            print("overlay_gate: stamped %s" % new[:12])
+            return 0
+        if argv[1] == "--init" and len(argv) > 2:
+            dry = "--dry-run" in argv[3:]
+            try:
+                created, skipped, gd, stamp = init(argv[2], dry_run=dry)
+            except IOError as exc:
+                sys.stderr.write("overlay_gate: %s\n" % exc)
+                return 2
+            for c in created:
+                print("%s %s" % ("would create" if dry else "created", c))
+            for s in skipped:
+                print("exists, left alone: %s" % s)
+            print("overlay_gate: %s into %s (gate at %s/, stamp %s)"
+                  % ("dry run" if dry else "installed", argv[2], gd,
+                     stamp[:12]))
+            if not dry:
+                print("Next: add a pointer to the overlay from a skill or a "
+                      "doc in that repo, or the gate will fail - an overlay "
+                      "nothing references is either dead or unread.")
+            return 0
         if argv[1] == "--root" and len(argv) > 2:
             root = argv[2]
         else:
-            sys.stderr.write("usage: overlay_gate.py [--root DIR | --selftest]\n")
+            sys.stderr.write(
+                "usage: overlay_gate.py [--root DIR | --selftest | "
+                "--verify-source | --stamp | --init TARGET [--dry-run]]\n")
             return 2
 
     findings, real = check(root)
@@ -271,6 +340,139 @@ def main(argv):
           "user-level parents NOT checkable from here)"
           % (len(real), len(proposals(root))))
     return 0
+
+
+# --- provenance and installation --------------------------------------------
+
+STAMP_RE = re.compile(r'^SOURCE_SHA = ".*"$', re.M)
+
+
+def body_hash(path):
+    """sha256 of this file with the stamp line normalised out.
+
+    Excluding the stamp is what makes the value stable: a hash that covered
+    the line holding it could never be written down.
+    """
+    import hashlib
+    with open(path, "rb") as fh:
+        raw = fh.read().decode("utf-8", "replace")
+    normalised = STAMP_RE.sub('SOURCE_SHA = ""', raw)
+    return hashlib.sha256(normalised.encode("utf-8")).hexdigest()
+
+
+def verify_source(path=None):
+    """Has this copy been edited since it was stamped?
+
+    Detects local edits, and by extension divergence between installations:
+    all copies are byte-identical and carry the same stamp, so a copy whose
+    computed hash differs from its stamp has drifted from the canonical.
+    It CANNOT tell you the canonical itself is current - for that, re-stamp
+    at the source and re-run --init.
+    """
+    path = path or os.path.abspath(__file__)
+    actual = body_hash(path)
+    with open(path) as fh:
+        m = STAMP_RE.search(fh.read())
+    stamped = m.group(0).split('"')[1] if m else None
+    return stamped, actual
+
+
+README_OVERLAYS = """# Skill overlays
+
+A skill named `X` reads `.claude/overlays/X.md` when it runs here and applies
+it over its own defaults. The filename is the binding, so there is nothing to
+register and nothing to keep in sync.
+
+**The doctrine is not restated here.** It lives in
+`skills/instruction-overlays/SKILL.md` in rainforestx/agentic-app-architecture.
+Read it before adding an overlay. What follows is only what is local.
+
+## The short version
+
+- An overlay is a **specialisation**, never an entry point. Plain markdown, no
+  frontmatter, no description, no triggers, so it cannot collide with the skill
+  it modifies.
+- It may **narrow, never weaken** the parent skill's evidence discipline.
+- New local knowledge goes to `_proposed/` as a dated observation, not straight
+  into an overlay. See `_proposed/README.md`.
+- `overlay_gate.py` enforces the checkable half and states in its own output
+  that it cannot verify whether the parent skill actually looks.
+
+## Current overlays
+
+| Overlay | Parent skill | Covers |
+|---|---|---|
+
+<!-- Add a row when you add an overlay. The gate fails if this table and the
+     directory disagree. -->
+"""
+
+README_PROPOSED = """# Proposals - staging, not behaviour
+
+**Nothing reads this directory.** That is its safety property. An agent may
+write here unattended, mid-task, without asking, precisely because writing here
+changes nothing. The gate fails if any skill or live overlay points at this
+path.
+
+Write an **observation**, not a rule: what you ran, what came back, when, and
+what you were doing. Every entry carries a date, because an observation that
+cannot age cannot be re-tested, and one that cannot be re-tested is a verdict
+wearing a timestamp.
+
+Never write standing claims about the world. The gate rejects those phrasings
+by name, because a conclusion outlives the condition that produced it.
+
+Something leaves here when a second occurrence in a different task appends
+alongside the first, a different actor generalises it, it **moves** into
+`../<skill>.md`, and the owner signs it off. Entries older than 90 days fail
+the gate: promote or delete.
+"""
+
+
+def init(target, self_path=None, dry_run=False):
+    """Install the convention into another repository.
+
+    Creates the overlay directory, the staging area, both READMEs, and a copy
+    of this gate stamped with the canonical source hash. Never overwrites: an
+    existing file is reported and left alone, because a scaffolder that
+    clobbers a repository's own writing is worse than one that does nothing.
+    """
+    self_path = self_path or os.path.abspath(__file__)
+    target = os.path.abspath(target)
+    if not os.path.isdir(target):
+        raise IOError("target is not a directory: %s" % target)
+
+    gate_dir = "gates" if os.path.isdir(os.path.join(target, "gates")) else None
+    if gate_dir is None:
+        gate_dir = ("build/automation"
+                    if os.path.isdir(os.path.join(target, "build", "automation"))
+                    else "gates")
+
+    planned = [
+        (os.path.join(OVERLAY_DIR, "README.md"), README_OVERLAYS),
+        (os.path.join(PROPOSED_DIR, "README.md"), README_PROPOSED),
+        (os.path.join(gate_dir, "overlay_gate.py"), None),
+    ]
+    created, skipped = [], []
+    stamp = body_hash(self_path)
+    with open(self_path) as fh:
+        gate_src = STAMP_RE.sub('SOURCE_SHA = "%s"' % stamp, fh.read())
+
+    for rel, content in planned:
+        full = os.path.join(target, rel)
+        if os.path.exists(full):
+            skipped.append(rel)
+            continue
+        if dry_run:
+            created.append(rel)
+            continue
+        os.makedirs(os.path.dirname(full), exist_ok=True)
+        with open(full, "w") as fh:
+            fh.write(gate_src if content is None else content)
+        if content is None:
+            os.chmod(full, 0o755)
+        created.append(rel)
+    return created, skipped, gate_dir, stamp
 
 
 # --- selftest ---------------------------------------------------------------
@@ -400,6 +602,98 @@ def selftest():
 
     # An empty proposal file reads as coverage.
     pcase("catches an empty proposal file", {"perplexity.md": "\n"}, 1)
+
+    # --- provenance and installation -------------------------------------
+
+    def icase(name, fn):
+        tmp = tempfile.mkdtemp()
+        try:
+            ok, detail = fn(tmp)
+            cases.append((name, ok, detail))
+        finally:
+            shutil.rmtree(tmp)
+
+    SELF = os.path.abspath(__file__)
+
+    # POSITIVE: a fresh repo gets the full scaffold and the gate passes on it.
+    def fresh(tmp):
+        subprocess.run(["git", "-C", tmp, "init", "-q"], check=False)
+        os.makedirs(os.path.join(tmp, "gates"), exist_ok=True)
+        created, skipped, gd, stamp = init(tmp, self_path=SELF)
+        want = {os.path.join(OVERLAY_DIR, "README.md"),
+                os.path.join(PROPOSED_DIR, "README.md"),
+                os.path.join("gates", "overlay_gate.py")}
+        if set(created) != want:
+            return False, "created %s" % sorted(created)
+        subprocess.run(["git", "-C", tmp, "add", "-A"], check=False,
+                       capture_output=True)
+        findings, _ = check(tmp)
+        findings += check_proposals(tmp)
+        return (not findings and not skipped,
+                "created %d, gate findings %d" % (len(created), len(findings)))
+    icase("init scaffolds a fresh repo and the gate passes on it", fresh)
+
+    # NEGATIVE: never clobber. A scaffolder that overwrites is worse than one
+    # that does nothing.
+    def noclobber(tmp):
+        os.makedirs(os.path.join(tmp, OVERLAY_DIR), exist_ok=True)
+        mine = os.path.join(tmp, OVERLAY_DIR, "README.md")
+        open(mine, "w").write("MINE - do not overwrite\n")
+        init(tmp, self_path=SELF)
+        body = open(mine).read()
+        return body.startswith("MINE"), "existing README preserved: %s" % (
+            body.startswith("MINE"))
+    icase("init never overwrites an existing file", noclobber)
+
+    # The installed gate carries a stamp that matches its own body.
+    def stamped(tmp):
+        subprocess.run(["git", "-C", tmp, "init", "-q"], check=False)
+        init(tmp, self_path=SELF)
+        inst = os.path.join(tmp, "gates", "overlay_gate.py")
+        st, act = verify_source(inst)
+        return st == act, "stamped %s actual %s" % (
+            (st or "")[:8], act[:8])
+    icase("the installed copy verifies against its own stamp", stamped)
+
+    # NEGATIVE: an edited copy fails verification. This is the drift check.
+    def drift(tmp):
+        subprocess.run(["git", "-C", tmp, "init", "-q"], check=False)
+        init(tmp, self_path=SELF)
+        inst = os.path.join(tmp, "gates", "overlay_gate.py")
+        with open(inst, "a") as fh:
+            fh.write("\n# a local edit nobody ported back\n")
+        st, act = verify_source(inst)
+        return st != act, "stamp %s != actual %s" % ((st or "")[:8], act[:8])
+    icase("an edited copy fails source verification", drift)
+
+    # The stamp is computed with its own line excluded, or stamping could
+    # never converge.
+    def stable(tmp):
+        a = os.path.join(tmp, "g.py")
+        shutil.copy(SELF, a)
+        h1 = body_hash(a)
+        src = open(a).read()
+        open(a, "w").write(STAMP_RE.sub('SOURCE_SHA = "%s"' % h1, src))
+        h2 = body_hash(a)
+        return h1 == h2, "hash stable across stamping: %s" % (h1 == h2)
+    icase("the stamp does not invalidate itself", stable)
+
+    # Layout detection: a repo using build/automation/ gets the gate there.
+    def layout(tmp):
+        subprocess.run(["git", "-C", tmp, "init", "-q"], check=False)
+        os.makedirs(os.path.join(tmp, "build", "automation"), exist_ok=True)
+        _, _, gd, _ = init(tmp, self_path=SELF)
+        return gd == "build/automation", "chose %s" % gd
+    icase("init follows an existing build/automation layout", layout)
+
+    # dry-run writes nothing.
+    def dry(tmp):
+        subprocess.run(["git", "-C", tmp, "init", "-q"], check=False)
+        created, _, _, _ = init(tmp, self_path=SELF, dry_run=True)
+        wrote = os.path.exists(os.path.join(tmp, OVERLAY_DIR, "README.md"))
+        return (len(created) == 3 and not wrote,
+                "planned %d, wrote anything: %s" % (len(created), wrote))
+    icase("dry run plans without writing", dry)
 
     failed = [c for c in cases if not c[1]]
     for name, ok, detail in cases:
