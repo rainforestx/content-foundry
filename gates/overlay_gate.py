@@ -209,7 +209,7 @@ def check(root=REPO):
     for name in real:
         path = os.path.join(root, OVERLAY_DIR, name)
         if not NAME_RE.match(name):
-            findings.append((name, "name is not a plausible skill name; an "
+            findings.append((os.path.join(OVERLAY_DIR, name), "name is not a plausible skill name; an "
                                    "overlay binds by filename, so this one "
                                    "binds to nothing"))
             malformed.add(name)
@@ -219,16 +219,16 @@ def check(root=REPO):
         stripped = body.strip()
         low = stripped.lower()
         if any(m in low for m in STUB_MARKERS) and len(stripped) < MIN_BYTES * 3:
-            findings.append((name, "looks like a stub (contains a TBD/TODO "
+            findings.append((os.path.join(OVERLAY_DIR, name), "looks like a stub (contains a TBD/TODO "
                                    "marker and is short)"))
             continue
         if len(stripped) < MIN_BYTES:
-            findings.append((name, "only %d bytes of content; an overlay that "
+            findings.append((os.path.join(OVERLAY_DIR, name), "only %d bytes of content; an overlay that "
                                    "says nothing still reads as coverage"
                              % len(stripped)))
             continue
         if not referenced_by(root, name):
-            findings.append((name, "nothing in the repository points at it. "
+            findings.append((os.path.join(OVERLAY_DIR, name), "nothing in the repository points at it. "
                                    "Either its parent skill does not look for "
                                    "it, or it is dead. Both are findings."))
 
@@ -241,9 +241,9 @@ def check(root=REPO):
         missing = sorted(set(real) - listed - malformed)
         phantom = sorted(listed - set(real) - {"README.md"})
         for m in missing:
-            findings.append((m, "on disk but absent from the README table"))
+            findings.append((os.path.join(OVERLAY_DIR, m), "on disk but absent from the README table"))
         for p in phantom:
-            findings.append((p, "listed in the README table but not on disk"))
+            findings.append((os.path.join(OVERLAY_DIR, p), "listed in the README table but not on disk"))
 
     return findings, real
 
@@ -262,7 +262,7 @@ def main(argv):
     findings, real = check(root)
     findings += [(n, w) for n, w in check_proposals(root)]
     for name, why in findings:
-        sys.stderr.write("%s/%s: %s\n" % (OVERLAY_DIR, name, why))
+        sys.stderr.write("%s: %s\n" % (name, why))
     if findings:
         sys.stderr.write("overlay_gate: FAIL - %d finding(s) over %d overlay(s)\n"
                          % (len(findings), len(real)))
