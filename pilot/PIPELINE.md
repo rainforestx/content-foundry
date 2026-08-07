@@ -49,3 +49,9 @@ gates (gates/README.md).
 - Operator decisions are recorded verbatim where they land (signatures
   in STATUS lines, taste in VOICE.md, accepted gate findings in the
   allowlist with justification).
+- Research lookups run under `.claude/overlays/perplexity.md`, which
+  specialises the general research skill for this pipeline: the claims-table
+  evidence bar, provenance over appearance for product generations, UK region,
+  and the acquisitions queue. New local rules go to
+  `.claude/overlays/_proposed/` as dated observations, never straight into the
+  overlay.
