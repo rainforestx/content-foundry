@@ -29,16 +29,14 @@ So this checks the half that is checkable:
    is the staging area an agent may write to unattended, and every one of
    those properties is what makes writing to it safe.
 
-What SOURCE_SHA does and does not prove, because the first version of this
-docstring overclaimed and an adversarial review caught it. --verify-source
-compares a copy against ITS OWN stamp, so it detects that THIS file was edited
-after installation. It does NOT prove two installations agree: anyone who edits
-a copy and runs --stamp gets a self-consistent file that verifies clean, and
-the original failure message helpfully recommended doing exactly that. It is a
-local tamper check, not drift detection. To compare installations you must
-compare their stamps against the canonical, which is a thing a human or a CI
-step does across repositories - no copy can do it alone, because a copy has no
-way to know what the canonical currently is.
+Copies of this file live in more than one repository. There is no mechanism
+here for comparing them, and there was one until 2026-08-08: a self-hash that
+each copy checked against its own stamp. It could only prove a copy was
+unedited since being stamped, which git already proves for a tracked file, and
+anyone who edited a copy and re-stamped it got a self-consistent file that
+verified clean. A check that cannot fail for the reason you are asking about is
+worse than no check, because it answers confidently. To compare installations,
+diff them against the canonical named below.
 
 The decay check makes this gate DATE-DEPENDENT: an unchanged tree can pass
 today and fail in three months. That is intended - an expired proposal needs
@@ -79,10 +77,9 @@ def _repo_root(start):
 
 
 REPO = _repo_root(HERE)
-# Stamped by --stamp from the canonical copy, and checked by --verify-source.
-# Computed over this file with the stamp line itself excluded, so stamping does
-# not invalidate the value it writes.
-SOURCE_SHA = "7882687a302c70a935cd4854b0ccf70ba5ff8508aac323cb5fda0300e2d21588"
+# Canonical source: gates/overlay_gate.py in rainforestx/agentic-app-architecture.
+# Port edits there and reinstall; diff against it to see whether a copy is
+# current. A pointer, not a checksum - it cannot go stale by being wrong.
 OVERLAY_DIR = os.path.join(".claude", "overlays")
 PROPOSED_DIR = os.path.join(OVERLAY_DIR, "_proposed")
 # An observation carries a date so it can age and be re-tested. A rule stated
@@ -362,66 +359,10 @@ def main(argv):
     if len(argv) > 1:
         if argv[1] == "--selftest":
             return selftest()
-        if argv[1] == "--verify-source":
-            stamped, actual = verify_source()
-            # FAIL CLOSED. A missing or unparseable stamp used to exit 0, so
-            # `sed -i '/^SOURCE_SHA/d'` defeated the check entirely - strictly
-            # easier than editing the value it guards.
-            if stamped is None:
-                sys.stderr.write(
-                    "overlay_gate: NO STAMP. This copy carries no SOURCE_SHA "
-                    "line, so nothing can be verified. Removing the line is "
-                    "the cheapest way to defeat this check, which is why its "
-                    "absence is a failure rather than a note. Reinstall from "
-                    "the canonical copy. (body %s)\n" % actual[:12])
-                return 1
-            if stamped == "unstamped":
-                sys.stderr.write(
-                    "overlay_gate: UNSTAMPED. Installed copies are stamped by "
-                    "--init; only the canonical source is legitimately "
-                    "unstamped, and it should be stamped before shipping. "
-                    "(body %s)\n" % actual[:12])
-                return 1
-            if stamped != actual:
-                sys.stderr.write(
-                    "overlay_gate: TAMPERED. stamped %s, actual %s. This copy "
-                    "has been edited since it was installed. Port the edit at "
-                    "the canonical source and reinstall; do NOT re-stamp here, "
-                    "because stamping in place launders the edit into a "
-                    "self-consistent copy and destroys the only evidence that "
-                    "the installations differ.\n" % (stamped[:12], actual[:12]))
-                return 1
-            print("overlay_gate: matches its own stamp (%s). NOTE: this proves "
-                  "this file is unedited since stamping. It does NOT prove it "
-                  "matches any other installation - see the docstring."
-                  % actual[:12])
-            return 0
-        if argv[1] == "--stamp":
-            path = os.path.abspath(__file__)
-            with open(path, encoding="utf-8") as fh:
-                src = fh.read()
-            hits = STAMP_RE.findall(src)
-            if len(hits) != 1:
-                sys.stderr.write(
-                    "overlay_gate: refusing to stamp - found %d SOURCE_SHA "
-                    "lines, expected exactly 1. Silently writing nothing and "
-                    "reporting success is how a provenance mechanism becomes "
-                    "decorative.\n" % len(hits))
-                return 2
-            new = body_hash(path)
-            # Atomic replace: an interrupted or concurrent in-place truncation
-            # left the gate destroyed rather than merely unstamped.
-            tmp = path + ".stamp.tmp"
-            with open(tmp, "w", encoding="utf-8") as fh:
-                fh.write(STAMP_RE.sub('SOURCE_SHA = "%s"' % new, src))
-            os.chmod(tmp, os.stat(path).st_mode & 0o777)
-            os.replace(tmp, path)
-            print("overlay_gate: stamped %s" % new[:12])
-            return 0
         if argv[1] == "--init" and len(argv) > 2:
             dry = "--dry-run" in argv[3:]
             try:
-                created, skipped, gd, stamp = init(argv[2], dry_run=dry)
+                created, skipped, gd = init(argv[2], dry_run=dry)
             except IOError as exc:
                 sys.stderr.write("overlay_gate: %s\n" % exc)
                 return 2
@@ -429,9 +370,8 @@ def main(argv):
                 print("%s %s" % ("would create" if dry else "created", c))
             for s in skipped:
                 print("exists, left alone: %s" % s)
-            print("overlay_gate: %s into %s (gate at %s/, stamp %s)"
-                  % ("dry run" if dry else "installed", argv[2], gd,
-                     stamp[:12]))
+            print("overlay_gate: %s into %s (gate at %s/)"
+                  % ("dry run" if dry else "installed", argv[2], gd))
             if not dry:
                 print("Next: add a pointer to the overlay from a skill or a "
                       "doc in that repo, or the gate will fail - an overlay "
@@ -442,7 +382,7 @@ def main(argv):
         else:
             sys.stderr.write(
                 "usage: overlay_gate.py [--root DIR | --selftest | "
-                "--verify-source | --stamp | --init TARGET [--dry-run]]\n")
+                "--init TARGET [--dry-run]]\n")
             return 2
 
     findings, real = check(root)
@@ -465,39 +405,6 @@ def main(argv):
 
 
 # --- provenance and installation --------------------------------------------
-
-STAMP_RE = re.compile(r'^SOURCE_SHA = ".*"$', re.M)
-
-
-def body_hash(path):
-    """sha256 of this file with the stamp line normalised out.
-
-    Excluding the stamp is what makes the value stable: a hash that covered
-    the line holding it could never be written down.
-    """
-    import hashlib
-    with open(path, "rb") as fh:
-        raw = fh.read().decode("utf-8", "replace")
-    normalised = STAMP_RE.sub('SOURCE_SHA = ""', raw)
-    return hashlib.sha256(normalised.encode("utf-8")).hexdigest()
-
-
-def verify_source(path=None):
-    """Has this copy been edited since it was stamped?
-
-    Detects local edits, and by extension divergence between installations:
-    all copies are byte-identical and carry the same stamp, so a copy whose
-    computed hash differs from its stamp has drifted from the canonical.
-    It CANNOT tell you the canonical itself is current - for that, re-stamp
-    at the source and re-run --init.
-    """
-    path = path or os.path.abspath(__file__)
-    actual = body_hash(path)
-    with open(path) as fh:
-        m = STAMP_RE.search(fh.read())
-    stamped = m.group(0).split('"')[1] if m else None
-    return stamped, actual
-
 
 README_OVERLAYS = """# Skill overlays
 
@@ -541,8 +448,12 @@ what you were doing. Every entry carries a date, because an observation that
 cannot age cannot be re-tested, and one that cannot be re-tested is a verdict
 wearing a timestamp.
 
-Never write standing claims about the world. The gate rejects those phrasings
-by name, because a conclusion outlives the condition that produced it.
+Never write standing claims about the world: a conclusion outlives the
+condition that produced it. The gate does not check this by banning phrasings -
+a blocklist fails to whatever you did not enumerate - it requires the positive
+property instead. Every entry must carry a date and a measurement: a command in
+backticks, a status code, a byte or result count, an exit code. An entry with
+neither is rejected however it is worded.
 
 Something leaves here when a second occurrence in a different task appends
 alongside the first, a different actor generalises it, it **moves** into
@@ -555,7 +466,7 @@ def init(target, self_path=None, dry_run=False):
     """Install the convention into another repository.
 
     Creates the overlay directory, the staging area, both READMEs, and a copy
-    of this gate stamped with the canonical source hash. Never overwrites: an
+    of this gate, byte for byte. Never overwrites: an
     existing file is reported and left alone, because a scaffolder that
     clobbers a repository's own writing is worse than one that does nothing.
     """
@@ -578,9 +489,8 @@ def init(target, self_path=None, dry_run=False):
         (os.path.join(gate_dir, "overlay_gate.py"), None),
     ]
     created, skipped = [], []
-    stamp = body_hash(self_path)
     with open(self_path) as fh:
-        gate_src = STAMP_RE.sub('SOURCE_SHA = "%s"' % stamp, fh.read())
+        gate_src = fh.read()
 
     for rel, content in planned:
         full = os.path.join(target, rel)
@@ -610,7 +520,7 @@ def init(target, self_path=None, dry_run=False):
             if content is None:
                 os.fchmod(fh.fileno(), 0o755)
         created.append(rel)
-    return created, skipped, gate_dir, stamp
+    return created, skipped, gate_dir
 
 
 # --- selftest ---------------------------------------------------------------
@@ -757,7 +667,7 @@ def selftest():
     def fresh(tmp):
         subprocess.run(["git", "-C", tmp, "init", "-q"], check=False)
         os.makedirs(os.path.join(tmp, "gates"), exist_ok=True)
-        created, skipped, gd, stamp = init(tmp, self_path=SELF)
+        created, skipped, gd = init(tmp, self_path=SELF)
         want = {os.path.join(OVERLAY_DIR, "README.md"),
                 os.path.join(PROPOSED_DIR, "README.md"),
                 os.path.join("gates", "overlay_gate.py")}
@@ -783,51 +693,19 @@ def selftest():
             body.startswith("MINE"))
     icase("init never overwrites an existing file", noclobber)
 
-    # The installed gate carries a stamp that matches its own body.
-    def stamped(tmp):
-        subprocess.run(["git", "-C", tmp, "init", "-q"], check=False)
-        init(tmp, self_path=SELF)
-        inst = os.path.join(tmp, "gates", "overlay_gate.py")
-        st, act = verify_source(inst)
-        return st == act, "stamped %s actual %s" % (
-            (st or "")[:8], act[:8])
-    icase("the installed copy verifies against its own stamp", stamped)
-
-    # NEGATIVE: an edited copy fails verification. This is the drift check.
-    def drift(tmp):
-        subprocess.run(["git", "-C", tmp, "init", "-q"], check=False)
-        init(tmp, self_path=SELF)
-        inst = os.path.join(tmp, "gates", "overlay_gate.py")
-        with open(inst, "a") as fh:
-            fh.write("\n# a local edit nobody ported back\n")
-        st, act = verify_source(inst)
-        return st != act, "stamp %s != actual %s" % ((st or "")[:8], act[:8])
-    icase("an edited copy fails source verification", drift)
-
-    # The stamp is computed with its own line excluded, or stamping could
-    # never converge.
-    def stable(tmp):
-        a = os.path.join(tmp, "g.py")
-        shutil.copy(SELF, a)
-        h1 = body_hash(a)
-        src = open(a).read()
-        open(a, "w").write(STAMP_RE.sub('SOURCE_SHA = "%s"' % h1, src))
-        h2 = body_hash(a)
-        return h1 == h2, "hash stable across stamping: %s" % (h1 == h2)
-    icase("the stamp does not invalidate itself", stable)
 
     # Layout detection: a repo using build/automation/ gets the gate there.
     def layout(tmp):
         subprocess.run(["git", "-C", tmp, "init", "-q"], check=False)
         os.makedirs(os.path.join(tmp, "build", "automation"), exist_ok=True)
-        _, _, gd, _ = init(tmp, self_path=SELF)
+        _, _, gd = init(tmp, self_path=SELF)
         return gd == "build/automation", "chose %s" % gd
     icase("init follows an existing build/automation layout", layout)
 
     # dry-run writes nothing.
     def dry(tmp):
         subprocess.run(["git", "-C", tmp, "init", "-q"], check=False)
-        created, _, _, _ = init(tmp, self_path=SELF, dry_run=True)
+        created, _, _ = init(tmp, self_path=SELF, dry_run=True)
         wrote = os.path.exists(os.path.join(tmp, OVERLAY_DIR, "README.md"))
         return (len(created) == 3 and not wrote,
                 "planned %d, wrote anything: %s" % (len(created), wrote))
@@ -879,16 +757,6 @@ def selftest():
         return not leaked, "leaked into victim dir: %s" % leaked
     rcase("init refuses a directory symlink pointing outside", sym_dir)
 
-    # R3. Deleting the stamp line was the cheapest way to defeat verification,
-    # and it exited 0.
-    def stamp_deleted(tmp):
-        g = os.path.join(tmp, "g.py"); shutil.copy(SELF, g)
-        src = "\n".join(l for l in open(g).read().split("\n")
-                        if not l.startswith("SOURCE_SHA = "))
-        open(g, "w").write(src)
-        st, _ = verify_source(g)
-        return st is None, "stamped=%r (None means main must fail)" % st
-    rcase("a copy with the stamp line deleted is detectable", stamp_deleted)
 
     # R4. .git is a FILE in a worktree or submodule; isdir() walked past it.
     def worktree(tmp):
