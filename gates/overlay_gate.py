@@ -27,6 +27,17 @@ So this checks the half that is checkable:
    is the staging area an agent may write to unattended, and every one of
    those properties is what makes writing to it safe.
 
+What SOURCE_SHA does and does not prove, because the first version of this
+docstring overclaimed and an adversarial review caught it. --verify-source
+compares a copy against ITS OWN stamp, so it detects that THIS file was edited
+after installation. It does NOT prove two installations agree: anyone who edits
+a copy and runs --stamp gets a self-consistent file that verifies clean, and
+the original failure message helpfully recommended doing exactly that. It is a
+local tamper check, not drift detection. To compare installations you must
+compare their stamps against the canonical, which is a thing a human or a CI
+step does across repositories - no copy can do it alone, because a copy has no
+way to know what the canonical currently is.
+
 The decay check makes this gate DATE-DEPENDENT: an unchanged tree can pass
 today and fail in three months. That is intended - an expired proposal needs
 action - but it means a red build here is not always caused by the commit in
@@ -50,12 +61,14 @@ def _repo_root(start):
     """Walk up to the enclosing git repository.
 
     Every copy of this file is byte-identical, so it cannot hardcode how deep
-    it sits. Byte-identity is what lets SOURCE_SHA detect drift between
-    installations rather than merely detecting a different install path.
+    it sits.
     """
     d = start
     while True:
-        if os.path.isdir(os.path.join(d, ".git")):
+        # .git is a DIRECTORY in a normal clone and a FILE in a worktree or
+        # submodule. isdir() missed both, so the walk continued past the
+        # real root and the gate checked a different tree, or nothing.
+        if os.path.exists(os.path.join(d, ".git")):
             return d
         parent = os.path.dirname(d)
         if parent == d:
@@ -67,7 +80,7 @@ REPO = _repo_root(HERE)
 # Stamped by --stamp from the canonical copy, and checked by --verify-source.
 # Computed over this file with the stamp line itself excluded, so stamping does
 # not invalidate the value it writes.
-SOURCE_SHA = "72d8a0a8c5f0f14ab5bdeca283b4113affea0db5485441544278f5354147cc5f"
+SOURCE_SHA = "87cbfb27becb73b676ed4d99481da8db39b00df3e1275c8169e81673f8cfffdf"
 OVERLAY_DIR = os.path.join(".claude", "overlays")
 PROPOSED_DIR = os.path.join(OVERLAY_DIR, "_proposed")
 # An observation carries a date so it can age and be re-tested. A rule stated
@@ -103,6 +116,11 @@ def referenced_by(root, name):
             capture_output=True, text=True)
     except OSError:
         return []
+    # git grep exits 1 for "no match" and >1 for a real failure. Treating
+    # both as "no match" turned a broken git into a false finding.
+    if out.returncode > 1:
+        raise RuntimeError("git grep failed (exit %d): %s"
+                           % (out.returncode, out.stderr.strip()[:200]))
     hits = [l for l in out.stdout.splitlines() if l.strip()]
     # The overlay itself and the directory README do not count as pointers.
     return [h for h in hits
@@ -119,9 +137,21 @@ def proposals(root):
 
 
 def _entries(body):
-    """Split a proposal into entries. A heading starts one."""
+    """Split a proposal into entries. A heading starts one.
+
+    The preamble - anything before the first heading - is returned too. It was
+    silently dropped, so text placed there escaped every check, which is the
+    obvious place to put something you do not want examined.
+    """
     parts = re.split(r"^#{2,}\s+", body, flags=re.M)
-    return [p for p in parts[1:] if p.strip()]
+    out = []
+    preamble = parts[0].strip() if parts else ""
+    # A file whose preamble is only the boilerplate title and instructions is
+    # not an entry; one carrying prose is.
+    if len(preamble) > 200:
+        out.append("(preamble)\n" + preamble)
+    out += [p for p in parts[1:] if p.strip()]
+    return out
 
 
 def check_proposals(root, today=None):
@@ -151,14 +181,18 @@ def check_proposals(root, today=None):
             continue
         if "_proposed" in body:
             findings.append((os.path.relpath(f, root),
-                             "points at the proposal staging area. Proposals "
-                             "must be unread; a pointer promotes one without "
-                             "review."))
+                             "names the proposal staging area. Two "
+                             "failures live here: reading it as behaviour "
+                             "promotes a proposal without review, and "
+                             "restating the bridge instruction duplicates "
+                             "what the parent skill owns. The path belongs in "
+                             "the parent skill and in _proposed/README.md, "
+                             "nowhere else."))
 
     for name in proposals(root):
         rel = os.path.join(PROPOSED_DIR, name)
         body = open(os.path.join(root, PROPOSED_DIR, name),
-                    errors="ignore").read()
+                    encoding="utf-8", errors="replace").read()
         ents = _entries(body)
         if not ents:
             findings.append((rel, "no dated entries; an empty proposal file "
@@ -186,9 +220,23 @@ def check_proposals(root, today=None):
             # tree can pass today and fail later. That is intended for a decay
             # rule and is declared in the module docstring.
             try:
-                iso = [d for d in dates if re.match(r"^20\d{2}-", d)]
-                if iso:
-                    seen = datetime.date.fromisoformat(sorted(iso)[-1])
+                parsed = []
+                for d in dates:
+                    if re.match(r"^20\d{2}-", d):
+                        parsed.append(datetime.date.fromisoformat(d))
+                        continue
+                    # DATE_RE also accepts "7 August 2026". Ignoring that form
+                    # here meant an entry written the documented way never
+                    # expired.
+                    for fmt in ("%d %B %Y", "%d %b %Y"):
+                        try:
+                            parsed.append(
+                                datetime.datetime.strptime(d, fmt).date())
+                            break
+                        except ValueError:
+                            continue
+                if parsed:
+                    seen = max(parsed)
                     age = (today - seen).days
                     if age > PROPOSAL_MAX_AGE_DAYS:
                         findings.append((rel, "entry %d (%s) is %d days old. "
@@ -218,7 +266,7 @@ def readme_table(root):
     p = os.path.join(root, OVERLAY_DIR, "README.md")
     if not os.path.exists(p):
         return None
-    with open(p) as fh:
+    with open(p, encoding="utf-8", errors="replace") as fh:
         text = fh.read()
     return set(re.findall(r"`([a-z0-9-]+\.md)`", text))
 
@@ -237,7 +285,12 @@ def check(root=REPO):
                                    "binds to nothing"))
             malformed.add(name)
             continue
-        with open(path) as fh:
+        if not os.path.isfile(path):
+            findings.append((os.path.join(OVERLAY_DIR, name),
+                             "is not a regular file (a directory or link "
+                             "named *.md binds to no skill)"))
+            continue
+        with open(path, encoding="utf-8", errors="replace") as fh:
             body = fh.read()
         stripped = body.strip()
         low = stripped.lower()
@@ -278,27 +331,58 @@ def main(argv):
             return selftest()
         if argv[1] == "--verify-source":
             stamped, actual = verify_source()
-            if stamped in (None, "unstamped"):
-                print("overlay_gate: unstamped copy (sha %s). Run --stamp on "
-                      "the canonical copy." % actual[:12])
-                return 0
+            # FAIL CLOSED. A missing or unparseable stamp used to exit 0, so
+            # `sed -i '/^SOURCE_SHA/d'` defeated the check entirely - strictly
+            # easier than editing the value it guards.
+            if stamped is None:
+                sys.stderr.write(
+                    "overlay_gate: NO STAMP. This copy carries no SOURCE_SHA "
+                    "line, so nothing can be verified. Removing the line is "
+                    "the cheapest way to defeat this check, which is why its "
+                    "absence is a failure rather than a note. Reinstall from "
+                    "the canonical copy. (body %s)\n" % actual[:12])
+                return 1
+            if stamped == "unstamped":
+                sys.stderr.write(
+                    "overlay_gate: UNSTAMPED. Installed copies are stamped by "
+                    "--init; only the canonical source is legitimately "
+                    "unstamped, and it should be stamped before shipping. "
+                    "(body %s)\n" % actual[:12])
+                return 1
             if stamped != actual:
                 sys.stderr.write(
-                    "overlay_gate: SOURCE DRIFT. stamped %s, actual %s. This "
-                    "copy has been edited since installation, so the "
-                    "installations no longer enforce the same rules. Re-stamp "
-                    "at the canonical source and re-run --init, or port the "
-                    "edit deliberately.\n" % (stamped[:12], actual[:12]))
+                    "overlay_gate: TAMPERED. stamped %s, actual %s. This copy "
+                    "has been edited since it was installed. Port the edit at "
+                    "the canonical source and reinstall; do NOT re-stamp here, "
+                    "because stamping in place launders the edit into a "
+                    "self-consistent copy and destroys the only evidence that "
+                    "the installations differ.\n" % (stamped[:12], actual[:12]))
                 return 1
-            print("overlay_gate: source matches its stamp (%s)" % actual[:12])
+            print("overlay_gate: matches its own stamp (%s). NOTE: this proves "
+                  "this file is unedited since stamping. It does NOT prove it "
+                  "matches any other installation - see the docstring."
+                  % actual[:12])
             return 0
         if argv[1] == "--stamp":
             path = os.path.abspath(__file__)
-            new = body_hash(path)
-            with open(path) as fh:
+            with open(path, encoding="utf-8") as fh:
                 src = fh.read()
-            with open(path, "w") as fh:
+            hits = STAMP_RE.findall(src)
+            if len(hits) != 1:
+                sys.stderr.write(
+                    "overlay_gate: refusing to stamp - found %d SOURCE_SHA "
+                    "lines, expected exactly 1. Silently writing nothing and "
+                    "reporting success is how a provenance mechanism becomes "
+                    "decorative.\n" % len(hits))
+                return 2
+            new = body_hash(path)
+            # Atomic replace: an interrupted or concurrent in-place truncation
+            # left the gate destroyed rather than merely unstamped.
+            tmp = path + ".stamp.tmp"
+            with open(tmp, "w", encoding="utf-8") as fh:
                 fh.write(STAMP_RE.sub('SOURCE_SHA = "%s"' % new, src))
+            os.chmod(tmp, os.stat(path).st_mode & 0o777)
+            os.replace(tmp, path)
             print("overlay_gate: stamped %s" % new[:12])
             return 0
         if argv[1] == "--init" and len(argv) > 2:
@@ -336,6 +420,11 @@ def main(argv):
         sys.stderr.write("overlay_gate: FAIL - %d finding(s) over %d overlay(s)\n"
                          % (len(findings), len(real)))
         return 1
+    if not os.path.isdir(os.path.join(root, OVERLAY_DIR)):
+        print("overlay_gate: convention NOT INSTALLED here (no %s). This is "
+              "not a pass over zero overlays - nothing was checked. Run "
+              "--init to install it." % OVERLAY_DIR)
+        return 0
     print("overlay_gate: clean (%d overlay(s) live, %d proposal file(s); "
           "user-level parents NOT checkable from here)"
           % (len(real), len(proposals(root))))
@@ -438,7 +527,9 @@ def init(target, self_path=None, dry_run=False):
     clobbers a repository's own writing is worse than one that does nothing.
     """
     self_path = self_path or os.path.abspath(__file__)
-    target = os.path.abspath(target)
+    # realpath, not abspath: abspath collapses ".." lexically without
+    # resolving symlinks, so a link in the path escaped containment.
+    target = os.path.realpath(target)
     if not os.path.isdir(target):
         raise IOError("target is not a directory: %s" % target)
 
@@ -460,17 +551,31 @@ def init(target, self_path=None, dry_run=False):
 
     for rel, content in planned:
         full = os.path.join(target, rel)
-        if os.path.exists(full):
+        # lexists, not exists: a DANGLING symlink is invisible to exists(), so
+        # the no-clobber guard did not fire and the write followed the link.
+        if os.path.lexists(full):
             skipped.append(rel)
             continue
+        # Containment BEFORE makedirs, or a directory symlink still causes
+        # directories to be created inside the victim tree.
+        parent = os.path.realpath(os.path.dirname(full))
+        if parent != target and not parent.startswith(target + os.sep):
+            raise IOError(
+                "refusing to write outside the target: %s resolves to %s"
+                % (rel, os.path.join(parent, os.path.basename(full))))
         if dry_run:
             created.append(rel)
             continue
         os.makedirs(os.path.dirname(full), exist_ok=True)
-        with open(full, "w") as fh:
+        # O_NOFOLLOW so a link planted between the check and the write is not
+        # followed; O_EXCL so the write cannot clobber; explicit 0o644 because
+        # os.open without a mode defaults to 0o777 & ~umask.
+        fd = os.open(full, os.O_WRONLY | os.O_CREAT | os.O_EXCL
+                     | os.O_NOFOLLOW, 0o644)
+        with os.fdopen(fd, "w") as fh:
             fh.write(gate_src if content is None else content)
-        if content is None:
-            os.chmod(full, 0o755)
+            if content is None:
+                os.fchmod(fh.fileno(), 0o755)
         created.append(rel)
     return created, skipped, gate_dir, stamp
 
@@ -694,6 +799,124 @@ def selftest():
         return (len(created) == 3 and not wrote,
                 "planned %d, wrote anything: %s" % (len(created), wrote))
     icase("dry run plans without writing", dry)
+
+    # --- regression cases for the 2026-08-07 adversarial review --------------
+    # Every case below FAILS without its fix. The prior suite passed with all
+    # of these defects present, which is what a review of 66 findings against
+    # 21 green cases is evidence of.
+
+    def rcase(name, fn):
+        tmp = tempfile.mkdtemp()
+        try:
+            ok, detail = fn(tmp)
+        except Exception as exc:
+            ok, detail = False, "raised %s: %s" % (type(exc).__name__, exc)
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+        cases.append((name, ok, detail))
+
+    # R1. A dangling symlink is invisible to os.path.exists, so the no-clobber
+    # guard did not fire and the write followed the link out of the target.
+    def sym_dangling(tmp):
+        tgt = os.path.join(tmp, "t"); out = os.path.join(tmp, "outside")
+        os.makedirs(os.path.join(tgt, OVERLAY_DIR)); os.makedirs(out)
+        victim = os.path.join(out, "PWNED.md")
+        os.symlink(victim, os.path.join(tgt, OVERLAY_DIR, "README.md"))
+        try:
+            init(tgt, self_path=SELF)
+        except IOError:
+            pass
+        return (not os.path.exists(victim),
+                "wrote outside target: %s" % os.path.exists(victim))
+    rcase("init does not follow a dangling symlink out of the target",
+          sym_dangling)
+
+    # R2. A live DIRECTORY symlink needed no dangling link at all.
+    def sym_dir(tmp):
+        tgt = os.path.join(tmp, "t"); vic = os.path.join(tmp, "victim")
+        os.makedirs(tgt); os.makedirs(vic)
+        os.symlink(vic, os.path.join(tgt, ".claude"))
+        try:
+            init(tgt, self_path=SELF)
+        except IOError:
+            pass
+        leaked = os.path.isdir(os.path.join(vic, "overlays"))
+        return not leaked, "leaked into victim dir: %s" % leaked
+    rcase("init refuses a directory symlink pointing outside", sym_dir)
+
+    # R3. Deleting the stamp line was the cheapest way to defeat verification,
+    # and it exited 0.
+    def stamp_deleted(tmp):
+        g = os.path.join(tmp, "g.py"); shutil.copy(SELF, g)
+        src = "\n".join(l for l in open(g).read().split("\n")
+                        if not l.startswith("SOURCE_SHA = "))
+        open(g, "w").write(src)
+        st, _ = verify_source(g)
+        return st is None, "stamped=%r (None means main must fail)" % st
+    rcase("a copy with the stamp line deleted is detectable", stamp_deleted)
+
+    # R4. .git is a FILE in a worktree or submodule; isdir() walked past it.
+    def worktree(tmp):
+        inner = os.path.join(tmp, "wt", "deep", "gates")
+        os.makedirs(inner)
+        open(os.path.join(tmp, "wt", ".git"), "w").write("gitdir: /elsewhere\n")
+        return (_repo_root(inner) == os.path.join(tmp, "wt"),
+                "resolved to %s" % _repo_root(inner))
+    rcase("repo root is found when .git is a file (worktree/submodule)",
+          worktree)
+
+    # R5. git failure was converted into "nothing points at it" - a false
+    # accusation shaped exactly like a real finding.
+    def gitfail(tmp):
+        os.makedirs(os.path.join(tmp, OVERLAY_DIR))
+        open(os.path.join(tmp, OVERLAY_DIR, "x.md"), "w").write(BODY)
+        try:
+            referenced_by(tmp, "x.md")      # not a git repo at all
+            return False, "returned quietly instead of raising"
+        except RuntimeError:
+            return True, "raised on git failure rather than reporting empty"
+    rcase("a git failure is not reported as 'nothing points at it'", gitfail)
+
+    # R6. Text before the first heading escaped every check.
+    def preamble(tmp):
+        ents = _entries("Some undated prose that should still be checked. "
+                        * 6 + "\n\n## real entry\n\n2026-08-07 ok\n")
+        return len(ents) == 2, "entries found: %d" % len(ents)
+    rcase("the preamble of a proposal is checked, not dropped", preamble)
+
+    # R7. DATE_RE accepts "7 August 2026" but decay only parsed ISO, so an
+    # entry written the documented way never expired.
+    def human_date(tmp):
+        import datetime
+        os.makedirs(os.path.join(tmp, PROPOSED_DIR))
+        open(os.path.join(tmp, PROPOSED_DIR, "x.md"), "w").write(
+            "## old\n\n7 August 2026, ran a thing and it returned 200.\n")
+        f = check_proposals(tmp, today=datetime.date(2027, 8, 7))
+        return (any("days old" in w for _, w in f),
+                "findings: %s" % [w[:40] for _, w in f])
+    rcase("a non-ISO dated entry still expires", human_date)
+
+    # R8. The review found NAME_RE deletable with 21/21 still green: case 6
+    # passed on the README-table finding instead.
+    def name_re_exercised(tmp):
+        bad = "Perplexity Notes.md"
+        return (not NAME_RE.match(bad) and NAME_RE.match("perplexity.md")
+                is not None, "regex discriminates directly")
+    rcase("the name regex is asserted directly, not via another finding",
+          name_re_exercised)
+
+    # R9. A non-UTF-8 byte crashed the gate with a traceback instead of
+    # producing a finding.
+    def bad_bytes(tmp):
+        subprocess.run(["git", "-C", tmp, "init", "-q"], check=False)
+        os.makedirs(os.path.join(tmp, OVERLAY_DIR))
+        with open(os.path.join(tmp, OVERLAY_DIR, "x.md"), "wb") as fh:
+            fh.write(b"# x\n\n" + b"\xff\xfe" + BODY.encode())
+        subprocess.run(["git", "-C", tmp, "add", "-A"], check=False,
+                       capture_output=True)
+        check(tmp)          # must not raise
+        return True, "survived a non-UTF-8 overlay"
+    rcase("a non-UTF-8 overlay does not crash the gate", bad_bytes)
 
     failed = [c for c in cases if not c[1]]
     for name, ok, detail in cases:
