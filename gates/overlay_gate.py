@@ -22,8 +22,10 @@ So this checks the half that is checkable:
    mis-named overlay silently binds to no skill.
 4. The README's overlay table lists what is actually on disk. A register that
    disagrees with the tree is how a directory stops being trustworthy.
-5. Proposals in .claude/overlays/_proposed/ stay unread, dated, free of
-   verdict language, and do not outlive PROPOSAL_MAX_AGE_DAYS. That directory
+5. Proposals in .claude/overlays/_proposed/ stay unread, dated, CARRY A
+   MEASUREMENT, and do not outlive PROPOSAL_MAX_AGE_DAYS. Requiring evidence
+   is the enforceable half; the verdict-phrase list is a hint that catches the
+   careless case and is evaded by rewording, which is why it is secondary. That directory
    is the staging area an agent may write to unattended, and every one of
    those properties is what makes writing to it safe.
 
@@ -80,7 +82,7 @@ REPO = _repo_root(HERE)
 # Stamped by --stamp from the canonical copy, and checked by --verify-source.
 # Computed over this file with the stamp line itself excluded, so stamping does
 # not invalidate the value it writes.
-SOURCE_SHA = "87cbfb27becb73b676ed4d99481da8db39b00df3e1275c8169e81673f8cfffdf"
+SOURCE_SHA = "7882687a302c70a935cd4854b0ccf70ba5ff8508aac323cb5fda0300e2d21588"
 OVERLAY_DIR = os.path.join(".claude", "overlays")
 PROPOSED_DIR = os.path.join(OVERLAY_DIR, "_proposed")
 # An observation carries a date so it can age and be re-tested. A rule stated
@@ -95,6 +97,18 @@ VERDICT_PHRASES = (
     "always fails", "never works", "the proxy blocks", "is not available",
 )
 PROPOSAL_MAX_AGE_DAYS = 90
+# What a measurement looks like. An entry must carry at least one of these, and
+# this is the primary check: VERDICT_PHRASES below is a denylist over natural
+# language, so it is evaded by any rewording and cannot be enforcement. Asking
+# for evidence rather than forbidding conclusions cannot be reworded around,
+# because a reworded verdict still has no evidence in it.
+EVIDENCE_RE = (
+    re.compile(r"`[^`\n]{3,}`"),                    # a command or a path
+    re.compile(r"\bHTTP[ /]?\d{3}\b", re.I),        # a status code
+    re.compile(r"\b\d[\d,]{2,}\s*(bytes|chars|files|results|ms|s)\b", re.I),
+    re.compile(r"\bexit(ed)?[ =]\d+\b", re.I),
+    re.compile(r"\breturned\b.{0,40}\b\d+\b", re.I),
+)
 NAME_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*\.md$")
 MIN_BYTES = 400
 STUB_MARKERS = ("tbd", "todo", "coming soon", "placeholder")
@@ -207,14 +221,33 @@ def check_proposals(root, today=None):
                                       "observation without one is a verdict."
                                  % (i, head)))
                 continue
-            # P3. Verdict language, which is the failure this bridge exists
-            # to prevent being automated.
+            # P3a. PRIMARY: does the entry contain a measurement at all?
+            # This is the check that cannot be reworded around.
+            if not any(rx.search(e) for rx in EVIDENCE_RE):
+                findings.append((rel, "entry %d (%s) carries no evidence. An "
+                                      "observation contains something that was "
+                                      "measured - a command in backticks, a "
+                                      "status code, a byte or item count, an "
+                                      "exit code. An entry with a date and a "
+                                      "conclusion but nothing measured is a "
+                                      "verdict with a timestamp on it."
+                                 % (i, head)))
+                continue
+            # P3b. SECONDARY, and a hint rather than enforcement. A denylist
+            # over natural language is evaded by any rewording; it is kept
+            # because it catches the careless case cheaply and names it
+            # precisely, not because it is a guarantee.
             low = e.lower()
             hit = [v for v in VERDICT_PHRASES if v in low]
             if hit:
-                findings.append((rel, "entry %d (%s) states a verdict (%r). "
-                                      "Record the command and its output, not "
-                                      "a standing property of the world."
+                findings.append((rel, "entry %d (%s) reads as a verdict (%r) "
+                                      "even though it carries evidence. State "
+                                      "what you measured and let the reader "
+                                      "conclude; a standing claim about the "
+                                      "world outlives the condition that "
+                                      "produced it. (Heuristic: this is a "
+                                      "phrase list, so it catches the careless "
+                                      "case and not the reworded one.)"
                                  % (i, head, hit[0])))
             # P4. Decay. NOTE: this makes the gate date-dependent - the same
             # tree can pass today and fail later. That is intended for a decay
@@ -805,6 +838,8 @@ def selftest():
     # of these defects present, which is what a review of 66 findings against
     # 21 green cases is evidence of.
 
+    import datetime
+
     def rcase(name, fn):
         tmp = tempfile.mkdtemp()
         try:
@@ -917,6 +952,37 @@ def selftest():
         check(tmp)          # must not raise
         return True, "survived a non-UTF-8 overlay"
     rcase("a non-UTF-8 overlay does not crash the gate", bad_bytes)
+
+    # R10. The evasion the review found: reword a verdict and the phrase list
+    # misses it entirely. The evidence requirement catches it, because a
+    # reworded verdict still has nothing measured in it.
+    def reworded_verdict(tmp):
+        os.makedirs(os.path.join(tmp, PROPOSED_DIR))
+        open(os.path.join(tmp, PROPOSED_DIR, "x.md"), "w").write(
+            "## net\n\n2026-08-07. That host seems to be refusing us and "
+            "probably always will, so treat it as off limits.\n")
+        f = check_proposals(tmp, today=datetime.date(2026, 8, 8))
+        # Not one VERDICT_PHRASE appears in that text.
+        low = "that host seems to be refusing us and probably always will"
+        evaded = not any(v in low for v in VERDICT_PHRASES)
+        return (evaded and any("no evidence" in w for _, w in f),
+                "denylist evaded=%s, evidence check caught it=%s"
+                % (evaded, any("no evidence" in w for _, w in f)))
+    rcase("a reworded verdict with no measurement is still caught",
+          reworded_verdict)
+
+    # R11. And the converse: a real observation passes, so the check is not
+    # simply rejecting everything.
+    def real_observation(tmp):
+        os.makedirs(os.path.join(tmp, PROPOSED_DIR))
+        open(os.path.join(tmp, PROPOSED_DIR, "x.md"), "w").write(
+            "## fetch\n\n2026-08-07, sourcing a datasheet. Ran "
+            "`curl -sSL https://example.com/a.pdf` and got HTTP 200, "
+            "102,435 bytes, first eight bytes %PDF-1.5.\n")
+        f = check_proposals(tmp, today=datetime.date(2026, 8, 8))
+        return not f, "findings on a good entry: %s" % [w[:40] for _, w in f]
+    rcase("a genuine dated observation with a measurement passes",
+          real_observation)
 
     failed = [c for c in cases if not c[1]]
     for name, ok, detail in cases:
